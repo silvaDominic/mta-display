@@ -3,5 +3,27 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
+  ],
+  "baseUrl": "./",
+  "paths": {
+    // Allows for simpler imports using '@'
+    "@/*": [
+      "src/*"
+    ],
+    "application/*": [
+      "application/*"
+    ],
+    "presentation/*": [
+      "presentation/*"
+    ]
+  },
+  // Include all .ts and .tsx files in src
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "vite-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

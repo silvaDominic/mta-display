@@ -1,0 +1,28 @@
+.container {
+    width: 600px;
+}
+
+li {
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+}
+
+li div {
+    display: flex;
+    justify-content: space-between;
+}
+
+li:hover {
+    cursor: pointer;
+    background-color: gray;
+
+}
+
+.detail {
+    display: none;
+}
+
+.show {
+    display: block;
+}
