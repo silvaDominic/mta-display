@@ -1,10 +1,20 @@
 import './App.css'
+import { Card } from "./components/card.tsx";
 
 function App() {
 
   return (
     <>
-      <div>Test</div>
+      <Card
+        title='Forest Hills'
+        trainLine='R'
+        minute={2}
+      />
+      <Card
+        title='96St'
+        trainLine='Q'
+        minute={1}
+      />
     </>
   )
 }
