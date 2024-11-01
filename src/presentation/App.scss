@@ -18,3 +18,19 @@ img {
     margin: 1rem;
     height: 60px;
 }
+
+#stack .container {
+    position: absolute;
+    left: 0;
+    width: 100%;
+}
+
+.first {
+    width: calc(100% - 200px) !important;
+    z-index: 2;
+}
+
+.second {
+    width: calc(100% - 100px) !important;
+    z-index: 1;
+}
