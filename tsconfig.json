@@ -15,6 +15,9 @@
     ],
     "presentation/*": [
       "presentation/*"
+    ],
+    "shared/*": [
+      "shared/*"
     ]
   },
   // Include all .ts and .tsx files in src
