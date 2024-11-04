@@ -3,11 +3,6 @@ body {
     background-color: #000000;
 }
 
-#deck {
-    display: inline-block;
-    width: 100%;
-}
-
 .direction {
     margin: 0.5rem 0;
     display: flex;
@@ -20,17 +15,22 @@ img {
 }
 
 #stack .container {
+    display: block;
+    height: 100px;
+}
+
+#stack .wrapper {
     position: absolute;
     left: 0;
     width: 100%;
 }
 
-.first {
+.pos-0 {
     width: calc(100% - 200px) !important;
     z-index: 2;
 }
 
-.second {
+.pos-1 {
     width: calc(100% - 100px) !important;
     z-index: 1;
 }
