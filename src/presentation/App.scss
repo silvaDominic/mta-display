@@ -4,9 +4,7 @@ body {
 }
 
 .direction {
-    margin: 0.5rem 0;
     display: flex;
-
 }
 
 img {
@@ -14,12 +12,12 @@ img {
     height: 60px;
 }
 
-#stack .container {
+.container {
+    margin: 0.5rem 0;
     display: block;
-    height: 100px;
 }
 
-#stack .wrapper {
+.wrapper {
     position: absolute;
     left: 0;
     width: 100%;
