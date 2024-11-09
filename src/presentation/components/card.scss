@@ -12,6 +12,7 @@ h1, h2 {
   font-family: Helvetica-Bold, 'Arial', sans-serif;
   background: transparent;
   width: 100%;
+  min-height: 100px;
   display: flex;
 
   .card-content {

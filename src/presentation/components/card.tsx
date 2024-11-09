@@ -1,16 +1,18 @@
-import { ReactElement } from "react";
+import { CSSProperties, ReactElement } from "react";
 import './card.scss';
 
 type CardProps = {
   title: string;
   trainLine: string;
   minute: number;
+  className?: string;
+  style?: CSSProperties;
 }
 
-export function Card({title, trainLine, minute}: CardProps): ReactElement {
+export function Card({title, trainLine, minute, className, style}: CardProps): ReactElement {
 
   return(
-    <div className='card card-conatiner'>
+    <div style={style} className={`card card-container ${className}`}>
       <div className='card-content'>
         <div>
           <h2 className="train-line"><span>{trainLine}</span></h2>
