@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../application/models/arrival-info.model.ts";
 import { RouteService } from "../application/services/route.service.ts";
 import { DIRECTION } from "../shared/constants/direction.enum.ts";
-import { MultiPlatformDisplay } from "./features/multi-platform/multi-platform-display.feature";
-import { SinglePlatformDisplay } from "./features/single-platform/single-platform-display.feature";
+import { MultiDirectionDisplay } from "./features/multi-platform/multi-direction-display.feature";
+import { SingleDirectionDisplay } from "./features/single-platform/single-direction-display.feature";
 
 enum DisplayType {
   Single,
@@ -31,9 +31,9 @@ function App() {
   function renderDisplay() {
     switch(displayType) {
       case DisplayType.Single:
-        return <SinglePlatformDisplay arrivalTimes={arrivalTimes} direction={DIRECTION.N}/>;
+        return <SingleDirectionDisplay arrivalTimes={arrivalTimes} direction={DIRECTION.N}/>;
       case DisplayType.Multi:
-        return <MultiPlatformDisplay arrivalTimes={arrivalTimes}/>;
+        return <MultiDirectionDisplay arrivalTimes={arrivalTimes}/>;
     }
   }
 

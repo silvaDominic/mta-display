@@ -2,19 +2,19 @@ import { ReactElement } from "react";
 import { DIRECTION } from "../../../shared/constants/direction.enum";
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
-import './single-platform-display.styles.scss';
+import './single-direction-display.styles.scss';
 
-type SinglePlatformDisplayProps = {
+type SingleDirectionDisplayProps = {
   arrivalTimes: Map<DIRECTION, ArrivalInfoModel[]>,
   direction: DIRECTION,
 }
 
-export function SinglePlatformDisplay({arrivalTimes, direction}: SinglePlatformDisplayProps): ReactElement {
+export function SingleDirectionDisplay({arrivalTimes, direction}: SingleDirectionDisplayProps): ReactElement {
   return (
-    <div className="spd container">
+    <div className="sdd container">
         {
           arrivalTimes?.get(DIRECTION[direction])?.map((arrData: ArrivalInfoModel, index: number) => (
-            <div className={`spd wrapper pos-${index}`}>
+            <div className={`sdd wrapper pos-${index}`}>
                 <Card
                   title={arrData.destination}
                   trainLine={arrData.line.toString()}
