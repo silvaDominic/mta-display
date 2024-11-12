@@ -15,7 +15,7 @@ export function Card({title, trainLine, minute, isFront, className, style}: Card
   return(
     <div style={style} className={`card card-container ${className}`}>
       <div className='card-content'>
-        <div>
+        <div className='train-info'>
           <h2 className="train-line"><span>{trainLine}</span></h2>
           {isFront && <h1 className="title">{title}</h1>}
         </div>
