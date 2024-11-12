@@ -2,13 +2,17 @@ import { ArrivalInfoModel } from "../models/arrival-info.model.ts";
 import { TRAIN_LINE } from "../../shared/constants/train-line.enum.ts";
 import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 
+function fakeId(): string{
+  return (Math.random() * 1000000).toString();
+}
+
 const STUB_ROUTE_INFO = [
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Church Ave', DIRECTION.S),
+  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, Date.now(), 'Court St', DIRECTION.N),
 ];
 
 export const RouteService = {

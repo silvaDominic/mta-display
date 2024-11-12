@@ -3,34 +3,16 @@ import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 
 export class ArrivalInfoModel {
   constructor(
-    private _line: TRAIN_LINE,
-    private _arrivalTime: number,
-    private _destination: string,
-    private _direction: DIRECTION,
-    private _alert?: string | undefined,
+    public readonly id: string,
+    public readonly line: TRAIN_LINE,
+    private readonly arrivalTime: number,
+    public readonly destination: string,
+    public readonly direction: DIRECTION,
+    public readonly alert?: string | undefined,
   ) {}
-
-  get line(): TRAIN_LINE {
-    return this._line;
-  }
-
-  get arrivalTime(): number {
-    return this._arrivalTime;
-  }
-
-  get destination(): string {
-    return this._destination;
-  }
-
-  get direction(): DIRECTION {
-    return this._direction;
-  }
-
-  get alert(): string | undefined {
-    return this._alert;
-  }
 
   getArrivalTimeInMinutes(): number {
     return Math.round(Math.random() * 10);
+    return this.arrivalTime / (1000 * 60);
   }
 }
