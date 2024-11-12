@@ -10,7 +10,7 @@ type CardProps = {
   style?: CSSProperties;
 }
 
-export function Card({title, trainLine, minute, isFront, className, style}: CardProps): ReactElement {
+export function Card({title, trainLine, minute, isFront, className = '', style}: CardProps): ReactElement {
 
   return(
     <div style={style} className={`card card-container ${className}`}>
