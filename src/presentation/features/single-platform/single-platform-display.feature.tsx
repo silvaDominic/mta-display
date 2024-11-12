@@ -19,6 +19,7 @@ export function SinglePlatformDisplay({arrivalTimes, direction}: SinglePlatformD
                   title={arrData.destination}
                   trainLine={arrData.line.toString()}
                   minute={arrData.getArrivalTimeInMinutes()}
+                  isFront={index > 1}
                   style={{ height: '200px' }}
                 />
             </div>

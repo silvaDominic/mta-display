@@ -21,6 +21,7 @@ export function MultiPlatformDisplay({arrivalTimes}: MultiPlatformDisplayProps) 
                     title={arrData.destination}
                     trainLine={arrData.line.toString()}
                     minute={arrData.getArrivalTimeInMinutes()}
+                    isFront={index > 1}
                   />
                 </div>
               </div>
@@ -38,6 +39,7 @@ export function MultiPlatformDisplay({arrivalTimes}: MultiPlatformDisplayProps) 
                     title={arrData.destination}
                     trainLine={arrData.line.toString()}
                     minute={arrData.getArrivalTimeInMinutes()}
+                    isFront={index > 1}
                   />
                 </div>
               </div>
