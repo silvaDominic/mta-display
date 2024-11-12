@@ -1,4 +1,4 @@
-import './App.scss';
+import './app.scss';
 import { useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../application/models/arrival-info.model.ts";
 import { RouteService } from "../application/services/route.service.ts";
