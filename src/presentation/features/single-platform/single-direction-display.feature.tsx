@@ -14,7 +14,7 @@ export function SingleDirectionDisplay({arrivalTimes, direction}: SingleDirectio
     <div className="sdd container">
         {
           arrivalTimes?.get(DIRECTION[direction])?.map((arrData: ArrivalInfoModel, index: number) => (
-            <div className={`sdd wrapper pos-${index}`}>
+            <div key={arrData.id} className={`sdd wrapper pos-${index}`}>
                 <Card
                   title={arrData.destination}
                   trainLine={arrData.line.toString()}

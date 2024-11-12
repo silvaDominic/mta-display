@@ -14,7 +14,7 @@ export function MultiDirectionDisplay({arrivalTimes}: MultiDirectionDisplayProps
         <div className="mdd container">
           {
             arrivalTimes?.get(DIRECTION.N)?.map((arrData: ArrivalInfoModel, index: number) => (
-              <div className={`mdd wrapper pos-${index}`}>
+              <div key={arrData.id} className={`mdd wrapper pos-${index}`}>
                 <div className="left-direction direction">
                   <img src="../../public/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
                   <Card
@@ -32,7 +32,7 @@ export function MultiDirectionDisplay({arrivalTimes}: MultiDirectionDisplayProps
         <div className="mdd container">
           {
             arrivalTimes?.get(DIRECTION.S)?.map((arrData: ArrivalInfoModel, index: number) => (
-              <div className={`mdd wrapper pos-${index}`}>
+              <div key={arrData.id} className={`mdd wrapper pos-${index}`}>
                 <div className="right-direction direction">
                   <img src="../../public/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>
                   <Card
