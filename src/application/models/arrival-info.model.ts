@@ -5,7 +5,8 @@ export class ArrivalInfoModel {
   constructor(
     public readonly id: string,
     public readonly line: TRAIN_LINE,
-    private readonly arrivalTime: number,
+    public readonly arrivalTime: number,
+    public readonly departureTime: number,
     public readonly destination: string,
     public readonly direction: DIRECTION,
     public readonly alert?: string | undefined,
