@@ -13,7 +13,6 @@ export class ArrivalInfoModel {
   ) {}
 
   getArrivalTimeInMinutes(): number {
-    return Math.round(Math.random() * 10);
-    return this.arrivalTime / (1000 * 60);
+    return Math.floor((this.arrivalTime - Date.now()) / (60 * 1000));
   }
 }
