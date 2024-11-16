@@ -5,6 +5,7 @@ import { RouteService } from "../application/services/route.service.ts";
 import { DIRECTION } from "../shared/constants/direction.enum.ts";
 import { MultiDirectionDisplay } from "./features/multi-platform/multi-direction-display.feature";
 import { SingleDirectionDisplay } from "./features/single-platform/single-direction-display.feature";
+import { findNextTrainToLeave, getNewTime } from "../shared/helpers";
 
 enum DisplayType {
   Single,
@@ -12,28 +13,32 @@ enum DisplayType {
 }
 
 function App() {
-  const [arrivalTimes, setArrivalTimes] = useState<Map<DIRECTION, ArrivalInfoModel[]>>(new Map<DIRECTION, ArrivalInfoModel[]>());
+  const [arrivalTimes, setArrivalTimes] = useState<ArrivalInfoModel[]>([]);
   const [displayType, setDisplayType] = useState<DisplayType>(DisplayType.Single);
 
-  useEffect(() => {
-    const map = new Map<DIRECTION, ArrivalInfoModel[]>();
-    RouteService.getArrivalTimes("[platformId]").then((res: ArrivalInfoModel[]) => {
-      res.map((arrTime: ArrivalInfoModel) => {
-        // Set if exist otherwise update values
-        map.set(
-          arrTime.direction,
-          map.get(arrTime.direction) ? [...map.get(arrTime.direction) as ArrivalInfoModel[], arrTime] : [arrTime]);
-      });
-      setArrivalTimes(map);
+  function onForceNextTrain() {
+    const nextToLeave = findNextTrainToLeave(arrivalTimes);
+    setArrivalTimes((prev: ArrivalInfoModel[]) => {
+      prev.splice(nextToLeave, 1);
+      return [...prev, getNewTime()];
     });
+  }
+
+  useEffect(() => {
+    RouteService.getArrivalTimes("[platformId]", DIRECTION.N)
+      .then(res => {
+        setArrivalTimes(res);
+      });
   }, []);
 
   function renderDisplay() {
-    switch(displayType) {
-      case DisplayType.Single:
-        return <SingleDirectionDisplay arrivalTimes={arrivalTimes} direction={DIRECTION.N}/>;
-      case DisplayType.Multi:
-        return <MultiDirectionDisplay arrivalTimes={arrivalTimes}/>;
+    if (arrivalTimes.length > 0) {
+      switch (displayType) {
+        case DisplayType.Single:
+          return <SingleDirectionDisplay arrivalTimes={arrivalTimes}/>;
+        case DisplayType.Multi:
+          return <MultiDirectionDisplay arrivalTimes={arrivalTimes}/>;
+      }
     }
   }
 
@@ -44,15 +49,14 @@ function App() {
           <option value={DisplayType.Single}>Single-platform</option>
           <option value={DisplayType.Multi}>Multi-platform</option>
         </select>
+
       </div>
 
       {renderDisplay()}
+
+      <button type='button' onClick={onForceNextTrain}>Force next train</button>
     </>
-
-
-
-)
-  ;
+  );
 }
 
 export default App;
