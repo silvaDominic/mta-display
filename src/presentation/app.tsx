@@ -19,8 +19,9 @@ function App() {
   function onForceNextTrain() {
     const nextToLeave = findNextTrainToLeave(arrivalTimes);
     setArrivalTimes((prev: ArrivalInfoModel[]) => {
-      prev.splice(nextToLeave, 1);
-      return [...prev, getNewTime()];
+      const temp = [...prev];
+      temp.splice(nextToLeave, 1);
+      return [...temp, getNewTime()];
     });
   }
 
