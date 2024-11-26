@@ -15,4 +15,8 @@ export class ArrivalInfoModel {
   getArrivalTimeInMinutes(): number {
     return Math.floor((this.arrivalTime - Date.now()) / (60 * 1000));
   }
+
+  getDepartureTimeInMinutes(): number {
+    return Math.floor((this.departureTime - Date.now()) / (60 * 1000));
+  }
 }
