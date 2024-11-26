@@ -26,11 +26,21 @@ function App() {
   }
 
   useEffect(() => {
-    RouteService.getArrivalTimes("[platformId]", DIRECTION.N)
-      .then(res => {
-        setArrivalTimes(res);
-      });
-  }, []);
+    switch(displayType) {
+      case DisplayType.Single:
+        RouteService.getArrivalTimes("[platformId]", DIRECTION.N)
+          .then(res => {
+            setArrivalTimes(res);
+          });
+        break;
+      case DisplayType.Multi:
+        RouteService.getArrivalTimes("[platformId]", DIRECTION.BOTH)
+          .then(res => {
+            setArrivalTimes(res);
+          });
+        break;
+    }
+  }, [displayType]);
 
   function renderDisplay() {
     if (arrivalTimes.length > 0) {
@@ -38,7 +48,10 @@ function App() {
         case DisplayType.Single:
           return <SingleDirectionDisplay arrivalTimes={arrivalTimes}/>;
         case DisplayType.Multi:
-          return <MultiDirectionDisplay arrivalTimes={arrivalTimes}/>;
+          return <MultiDirectionDisplay
+            leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
+            rightSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.S)}
+          />;
       }
     }
   }
@@ -51,11 +64,10 @@ function App() {
           <option value={DisplayType.Multi}>Multi-platform</option>
         </select>
 
+        <button type='button' onClick={onForceNextTrain}>Force next train</button>
       </div>
 
       {renderDisplay()}
-
-      <button type='button' onClick={onForceNextTrain}>Force next train</button>
     </>
   );
 }
