@@ -1,6 +1,7 @@
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
 import './multi-direction-display.styles.scss';
+import { Debug } from "../../components/debug";
 
 type MultiDirectionDisplayProps = {
   leftSideArrivals: ArrivalInfoModel[];
@@ -50,6 +51,16 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals}: Mul
               </div>
             ))
           }
+        </div>
+
+        <div style={{color: 'white'}}>
+          <h3>Left</h3>
+          <Debug arrivalTimes={sortedLeftSideArrivals}/>
+        </div>
+
+        <div style={{color: 'white'}}>
+          <h3>Right</h3>
+          <Debug arrivalTimes={sortedRightSideArrivals}/>
         </div>
       </div>
     </>

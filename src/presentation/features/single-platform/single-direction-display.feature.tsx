@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
 import './single-direction-display.styles.scss';
+import { Debug } from "../../components/debug";
 
 type SingleDirectionDisplayProps = {
   arrivalTimes: ArrivalInfoModel[],
@@ -47,6 +48,10 @@ export function SingleDirectionDisplay({arrivalTimes}: SingleDirectionDisplayPro
           ))
         }
       </div>
+
+      <hr/>
+
+      <Debug arrivalTimes={arrivalTimes}/>
     </>
   );
 }
