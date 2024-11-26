@@ -1,30 +1,52 @@
-import { ReactElement } from "react";
-import { DIRECTION } from "../../../shared/constants/direction.enum";
+import { ReactElement, useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
 import './single-direction-display.styles.scss';
 
 type SingleDirectionDisplayProps = {
-  arrivalTimes: Map<DIRECTION, ArrivalInfoModel[]>,
-  direction: DIRECTION,
+  arrivalTimes: ArrivalInfoModel[],
 }
 
-export function SingleDirectionDisplay({arrivalTimes, direction}: SingleDirectionDisplayProps): ReactElement {
+export function SingleDirectionDisplay({arrivalTimes}: SingleDirectionDisplayProps): ReactElement {
+  const sortedTimes: ArrivalInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getArrivalTimeInMinutes() - timeA.getArrivalTimeInMinutes());
+  const [displayedTimes, setDisplayedTimes] = useState<ArrivalInfoModel[]>(sortedTimes);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  useEffect(() => {
+    setDisplayedTimes((prev: ArrivalInfoModel[]) => {
+      if (prev !== sortedTimes) {
+        setIsDeleting(true);
+        return prev;
+      }
+      return sortedTimes;
+    });
+  }, [sortedTimes]);
+
+  function onTransitionEnd() {
+    setIsDeleting(false);
+    setDisplayedTimes(sortedTimes);
+  }
+
   return (
-    <div className="sdd container">
+    <>
+      <div className="sdd container">
         {
-          arrivalTimes?.get(DIRECTION[direction])?.map((arrData: ArrivalInfoModel, index: number) => (
-            <div key={arrData.id} className={`sdd wrapper pos-${index}`}>
-                <Card
-                  title={arrData.destination}
-                  trainLine={arrData.line.toString()}
-                  minute={arrData.getArrivalTimeInMinutes()}
-                  isFront={index > 1}
-                  style={{ height: '200px' }}
-                />
+          displayedTimes?.map((arrData: ArrivalInfoModel, index: number) => (
+            <div
+              key={arrData.id}
+              className={`sdd wrapper pos-${index} ${index === 2 && isDeleting ? 'deleting' : ''}`}
+              onTransitionEnd={onTransitionEnd}
+            >
+              <Card
+                title={arrData.destination}
+                trainLine={arrData.line.toString()}
+                minute={arrData.getArrivalTimeInMinutes()}
+                isFront={index > 1}
+              />
             </div>
           ))
         }
       </div>
+    </>
   );
 }
