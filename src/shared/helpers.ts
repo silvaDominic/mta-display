@@ -19,12 +19,14 @@ export function findNextTrainToLeave(arrivalTimes: ArrivalInfoModel[]): number {
 }
 
 export function getNewTime(): ArrivalInfoModel {
+  const destination = Math.round(Math.random()) > 0 ? 'Court St' : 'Church Ave';
+
   return new ArrivalInfoModel(
     fakeId(),
     TRAIN_LINE.G,
     getRandomFutureTime(),
     Date.now() + 10,
-    'Court St',
-    DIRECTION.N
+    destination,
+    destination === 'Court St' ? DIRECTION.N : DIRECTION.S,
   );
 }
