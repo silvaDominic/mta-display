@@ -16,6 +16,13 @@ h1, h2 {
   height: 100%;
   display: flex;
 
+  &.boarding {
+    .card-content {
+      border: 3px solid #ffff00;
+      animation: 2s none 0s infinite steps(1, end) boarding-flash;
+    }
+  }
+
   .card-content {
     display: flex;
     width: 100%;
@@ -71,3 +78,12 @@ h1, h2 {
   opacity: 0.8;
 }
 
+@keyframes boarding-flash {
+  0%, 100% {
+    background-color: #ffff00;
+  }
+  50% {
+    background-color: #000000;
+    color: #ffff00;
+  }
+}
