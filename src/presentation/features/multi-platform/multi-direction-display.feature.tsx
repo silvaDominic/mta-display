@@ -10,9 +10,9 @@ type MultiDirectionDisplayProps = {
 
 export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals}: MultiDirectionDisplayProps) {
   const sortedLeftSideArrivals = leftSideArrivals
-    .sort((timeA, timeB) => timeB.getArrivalTimeInMinutes() - timeA.getArrivalTimeInMinutes()).slice(0, 3);
+    .sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes()).slice(0, 3);
   const sortedRightSideArrivals = rightSideArrivals
-    .sort((timeA, timeB) => timeB.getArrivalTimeInMinutes() - timeA.getArrivalTimeInMinutes()).slice(0, 3);
+    .sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes()).slice(0, 3);
 
   return (
     <>
@@ -26,8 +26,9 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals}: Mul
                   <Card
                     title={arrData.destination}
                     trainLine={arrData.line.toString()}
-                    minute={arrData.getArrivalTimeInMinutes()}
+                    minute={arrData.getTimeUntilArrivalInMinutes()}
                     isFront={index > 1}
+                    className={`${arrData.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`}
                   />
                 </div>
               </div>
@@ -44,8 +45,9 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals}: Mul
                   <Card
                     title={arrData.destination}
                     trainLine={arrData.line.toString()}
-                    minute={arrData.getArrivalTimeInMinutes()}
+                    minute={arrData.getTimeUntilArrivalInMinutes()}
                     isFront={index > 1}
+                    className={`${arrData.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`}
                   />
                 </div>
               </div>

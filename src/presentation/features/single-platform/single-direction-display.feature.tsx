@@ -9,7 +9,7 @@ type SingleDirectionDisplayProps = {
 }
 
 export function SingleDirectionDisplay({arrivalTimes}: SingleDirectionDisplayProps): ReactElement {
-  const sortedTimes: ArrivalInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getArrivalTimeInMinutes() - timeA.getArrivalTimeInMinutes());
+  const sortedTimes: ArrivalInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes());
   const [displayedTimes, setDisplayedTimes] = useState<ArrivalInfoModel[]>(sortedTimes);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -41,8 +41,9 @@ export function SingleDirectionDisplay({arrivalTimes}: SingleDirectionDisplayPro
               <Card
                 title={arrData.destination}
                 trainLine={arrData.line.toString()}
-                minute={arrData.getArrivalTimeInMinutes()}
+                minute={arrData.getTimeUntilArrivalInMinutes()}
                 isFront={index > 1}
+                className={`${arrData.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`}
               />
             </div>
           ))

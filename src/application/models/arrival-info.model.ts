@@ -12,11 +12,11 @@ export class ArrivalInfoModel {
     public readonly alert?: string | undefined,
   ) {}
 
-  getArrivalTimeInMinutes(): number {
+  getTimeUntilArrivalInMinutes(): number {
     return Math.round((this.arrivalTime - Date.now()) / (60 * 1000));
   }
 
-  getDepartureTimeInMinutes(): number {
+  getTimeUntilDepartureInMinutes(): number {
     return Math.round((this.departureTime - Date.now()) / (60 * 1000));
   }
 }
