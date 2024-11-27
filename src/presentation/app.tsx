@@ -25,6 +25,10 @@ function App() {
     });
   }
 
+  function forceUpdate(): void {
+    setArrivalTimes(prev => [...prev]);
+  }
+
   useEffect(() => {
     switch(displayType) {
       case DisplayType.Single:
@@ -65,6 +69,7 @@ function App() {
         </select>
 
         <button type='button' onClick={onForceNextTrain}>Force next train</button>
+        <button type='button' onClick={forceUpdate}>Force update</button>
       </div>
 
       {renderDisplay()}
