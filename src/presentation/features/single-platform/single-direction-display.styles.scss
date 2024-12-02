@@ -32,6 +32,8 @@
   }
 
   .pos-0, .pos-1 {
+    transition: transform 0s linear, opacity 0.5s ease 0.25s;
+
     .card-content {
       opacity: 0.75;
       padding-left: calc(100% - 200px);
@@ -45,12 +47,15 @@
   }
 
   .pos-2 {
+    transition: width 0.5s ease;
+
     .card-content {
       .train-info {
-        margin-top: 1rem;
+        margin: 0.5rem 0 1rem 0;
       }
 
       .minute {
+        transition: margin-left 0.5s;
         margin-left: 8rem;
 
         h1 {
@@ -60,6 +65,10 @@
         span {
           font-size: 1.66rem;
         }
+      }
+
+      .title {
+        transition: opacity 0.5s ease 0.25s;
       }
     }
 
@@ -76,8 +85,47 @@
   }
 
   .title {
+    white-space: nowrap;
     font-size: 2.47rem;
   }
+
+  &.alerting {
+    .alert-container {
+      font-size: 42px;
+      overflow-y: scroll;
+      height: 100%;
+      color: white;
+      margin-left: 200px;
+      padding: 0 20px;
+    }
+
+    .pos-0, .pos-1 {
+      transition: opacity 0.5s ease, transform 0.25s linear 0.5s;
+      opacity: 0;
+      transform: translateX(-100%)
+    }
+
+    .pos-2 {
+      width: 200px !important;
+
+      .title {
+        transition: opacity 0.5s ease, transform 0.25s linear 0.5s;
+        opacity: 0;
+        transform: translateX(-100%);
+        width: 0;
+      }
+
+      .minute {
+        margin-left: 2rem;
+      }
+    }
+  }
 }
+
+// TODO: Go over CSS and consider optimizing a bit
+// TODO: Look into forceNextTrain bug
+// TODO: Push alert changes
+// TODO: Implement scroll behavior
+// TODO: Include a normalize file
 
 
