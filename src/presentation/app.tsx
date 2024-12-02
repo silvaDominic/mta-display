@@ -6,6 +6,7 @@ import { DIRECTION } from "../shared/constants/direction.enum.ts";
 import { MultiDirectionDisplay } from "./features/multi-platform/multi-direction-display.feature";
 import { SingleDirectionDisplay } from "./features/single-platform/single-direction-display.feature";
 import { findNextTrainToLeave, getNewTime } from "../shared/helpers";
+import { AlertModel } from "../application/models/alert.model";
 
 enum DisplayType {
   Single,
@@ -15,6 +16,7 @@ enum DisplayType {
 function App() {
   const [arrivalTimes, setArrivalTimes] = useState<ArrivalInfoModel[]>([]);
   const [displayType, setDisplayType] = useState<DisplayType>(DisplayType.Single);
+  const [alerts, setAlerts] = useState<AlertModel[]>([]);
 
   function onForceNextTrain() {
     const nextToLeave = findNextTrainToLeave(arrivalTimes);
@@ -27,6 +29,15 @@ function App() {
 
   function forceUpdate(): void {
     setArrivalTimes(prev => [...prev]);
+  }
+
+  function toggleAlerts(): void {
+    if (alerts.length > 0) {
+      setAlerts([]);
+    } else {
+      RouteService.getAlerts("[platformId]")
+        .then(res => setAlerts(res));
+    }
   }
 
   useEffect(() => {
@@ -50,7 +61,7 @@ function App() {
     if (arrivalTimes.length > 0) {
       switch (displayType) {
         case DisplayType.Single:
-          return <SingleDirectionDisplay arrivalTimes={arrivalTimes}/>;
+          return <SingleDirectionDisplay arrivalTimes={arrivalTimes} alerts={alerts}/>;
         case DisplayType.Multi:
           return <MultiDirectionDisplay
             leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
@@ -70,6 +81,7 @@ function App() {
 
         <button type='button' onClick={onForceNextTrain}>Force next train</button>
         <button type='button' onClick={forceUpdate}>Force update</button>
+        <button type='button' onClick={toggleAlerts}>Toggle Alerts</button>
       </div>
 
       {renderDisplay()}
