@@ -61,11 +61,13 @@ function App() {
     if (arrivalTimes.length > 0) {
       switch (displayType) {
         case DisplayType.Single:
-          return <SingleDirectionDisplay arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={() => toggleAlerts()}/>;
+          return <SingleDirectionDisplay arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
         case DisplayType.Multi:
           return <MultiDirectionDisplay
             leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
             rightSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.S)}
+            alerts={alerts}
+            onAlertEnd={toggleAlerts}
           />;
       }
     }
