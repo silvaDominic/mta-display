@@ -1,0 +1,16 @@
+  .alert-container {
+    font-size: 42px;
+    overflow-y: hidden;
+    height: 100%;
+    color: white;
+    margin-left: 200px;
+    padding: 0 20px;
+
+    .alert-description {
+      padding-top: 225px;
+    }
+
+    .alert-resolution {
+      padding-bottom: 250px;
+    }
+  }
