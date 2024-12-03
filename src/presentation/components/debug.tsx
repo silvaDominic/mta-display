@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 import { ArrivalInfoModel } from "../../application/models/arrival-info.model";
 
 type DebugProps = {
@@ -11,12 +11,12 @@ export function Debug({arrivalTimes}: DebugProps): ReactElement {
       {
         arrivalTimes.map((time: ArrivalInfoModel) => {
           return(
-            <>
-            <li key={time.id} style={{color: 'white'}}>
-              <span><span>{time.destination}</span> {time.getTimeUntilArrivalInMinutes()} mins</span>
-              <div>{time.getTimeUntilDepartureInMinutes()} </div>
-            </li>
-            </>
+            <Fragment key={time.id}>
+              <li style={{color: 'white'}}>
+                <span><span>{time.destination}</span> {time.getTimeUntilArrivalInMinutes()} mins</span>
+                <div>{time.getTimeUntilDepartureInMinutes()} </div>
+              </li>
+            </Fragment>
           )
         })
       }
