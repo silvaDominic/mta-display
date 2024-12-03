@@ -8,9 +8,10 @@ const BOTTOM_PADDING_OFFSET = 25;
 type AlertProps = {
   alert: AlertModel;
   onAlertEnd: () => void;
+  className?: string;
 }
 
-export function Alert({alert, onAlertEnd}: AlertProps): ReactElement {
+export function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactElement {
   const alertContainerRef = useRef<HTMLDivElement>(null);
   const alertResolutionRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +47,7 @@ export function Alert({alert, onAlertEnd}: AlertProps): ReactElement {
   }, [alert, onAlertEnd]);
 
   return (
-    <div ref={alertContainerRef} className='alert-container'>
+    <div ref={alertContainerRef} className={`alert-container ${className}`}>
       <div className='alert-description'>{alert.description}</div>
       <div ref={alertResolutionRef} className='alert-resolution'>{alert.resolution}</div>
     </div>

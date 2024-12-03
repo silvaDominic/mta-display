@@ -3,8 +3,15 @@
     overflow-y: hidden;
     height: 100%;
     color: white;
-    margin-left: 200px;
     padding: 0 20px;
+
+    &.mdd {
+      margin-left: calc(200px + 60px);
+    }
+
+    &.sdd {
+      margin-left: 200px;
+    }
 
     .alert-description {
       padding-top: 225px;
