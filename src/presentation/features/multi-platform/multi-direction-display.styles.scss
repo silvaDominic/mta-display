@@ -1,12 +1,60 @@
+#stack {
+  position: relative;
+  overflow: hidden;
+  height: calc(200px + (0.75rem * 2));
+}
+
+#stack-wrapper {
+  position: absolute;
+  width: 100%;
+}
+
 .mdd.container {
   height: 100px;
 
   .pos-0, .pos-1 {
+    transition: transform 0s linear, opacity 0.5s ease 0.25s;
+
     .card-content {
       justify-content: end;
       opacity: 0.75;
     }
   }
+
+  .pos-2 {
+      .title {
+        transition: opacity 0.25s ease 0.25s;
+      }
+  }
+
+  .title {
+    white-space: nowrap;
+  }
 }
 
+.alerting {
+  .mdd.container {
+    width: 200px;
 
+    .pos-0, .pos-1 {
+      transition: opacity 0.5s ease, transform 0.25s linear 0.5s;
+      opacity: 0;
+      transform: translateX(-100%)
+    }
+
+    .pos-2 {
+      width: 200px !important;
+
+      .title {
+        transition: opacity 0.25s ease, transform 0.25s linear 0.5s;
+        opacity: 0;
+        transform: translateX(-100%);
+        width: 0;
+      }
+
+      .minute {
+        margin-left: 2rem;
+      }
+    }
+  }
+}
