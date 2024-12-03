@@ -1,6 +1,7 @@
 .sdd.container {
   position: relative;
   height: 200px;
+  overflow: hidden;
 
   .card-content {
     flex-direction: column;
@@ -79,11 +80,19 @@
   &.alerting {
     .alert-container {
       font-size: 42px;
-      overflow-y: scroll;
+      overflow-y: hidden;
       height: 100%;
       color: white;
       margin-left: 200px;
       padding: 0 20px;
+
+      .alert-description {
+        padding-top: 225px;
+      }
+
+      .alert-resolution {
+        padding-bottom: 250px;
+      }
     }
 
     .pos-0, .pos-1 {
@@ -117,11 +126,3 @@
     }
   }
 }
-
-// TODO: Go over CSS and consider optimizing a bit
-// TODO: Look into forceNextTrain bug
-// TODO: Push alert changes
-// TODO: Implement scroll behavior
-// TODO: Include a normalize file
-
-
