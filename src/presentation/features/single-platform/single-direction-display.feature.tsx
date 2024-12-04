@@ -1,10 +1,12 @@
 import { ReactElement, useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
-import './single-direction-display.styles.scss';
 import { Debug } from "../../components/debug";
 import { AlertModel } from "../../../application/models/alert.model";
 import { Alert } from "../../components/alert";
+
+import '../display.scss';
+import './single-direction-display.styles.scss';
 
 type SingleDirectionDisplayProps = {
   arrivalTimes: ArrivalInfoModel[],

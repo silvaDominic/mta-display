@@ -1,10 +1,12 @@
 import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
 import { Card } from "../../components/card";
-import './multi-direction-display.styles.scss';
 import { Debug } from "../../components/debug";
 import { Alert } from "../../components/alert";
 import { AlertModel } from "../../../application/models/alert.model";
 import { useEffect, useState } from "react";
+
+import '../display.scss';
+import './multi-direction-display.styles.scss';
 
 type MultiDirectionDisplayProps = {
   leftSideArrivals: ArrivalInfoModel[];
