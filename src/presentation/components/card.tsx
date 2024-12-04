@@ -13,13 +13,13 @@ type CardProps = {
 export function Card({title, trainLine, minute, isFront, className = '', style}: CardProps): ReactElement {
 
   return(
-    <div style={style} className={`card card-container ${className}`}>
-      <div className='card-content'>
-        <div className='train-info'>
-          <h2 className="train-line"><span>{trainLine}</span></h2>
-          {isFront && <h1 className="title">{title}</h1>}
+    <div style={style} className={`card card__container ${className}`}>
+      <div className='card__content'>
+        <div className='card__wrapper'>
+          <h2 className="card__train-line"><span>{trainLine}</span></h2>
+          {isFront && <h1 className="card__train-name">{title}</h1>}
         </div>
-        <div className="minute">
+        <div className="card__minute">
           <h1>{minute}</h1>
           <span>min</span>
         </div>

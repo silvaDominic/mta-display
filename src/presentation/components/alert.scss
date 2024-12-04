@@ -1,4 +1,4 @@
-  .alert-container {
+  .alert__container {
     font-size: 42px;
     overflow-y: hidden;
     height: 100%;
@@ -13,11 +13,11 @@
       margin-left: 200px;
     }
 
-    .alert-description {
+    .alert__description {
       padding-top: 225px;
     }
 
-    .alert-resolution {
+    .alert__resolution {
       padding-bottom: 250px;
     }
   }

@@ -52,13 +52,13 @@ export function SingleDirectionDisplay({arrivalTimes, alerts, onAlertEnd}: Singl
 
   return (
     <>
-      <div className={`sdd container ${applyAlertClasses()}`}>
+      <div className={`sdd display__container ${applyAlertClasses()}`}>
         {
           displayedTimes?.map((arrData: ArrivalInfoModel, index: number) => (
             <div
               key={arrData.id}
               className={
-                `sdd wrapper pos-${index}
+                `display__wrapper pos-${index}
               ${applyDeleteClasses(index)}`
               }
               onTransitionEnd={onTransitionEnd}
@@ -73,7 +73,14 @@ export function SingleDirectionDisplay({arrivalTimes, alerts, onAlertEnd}: Singl
             </div>
           ))
         }
-        { alerts.length > 0 && <Alert alert={alerts[0]} onAlertEnd={onAlertEnd} /> }
+        {
+          alerts.length > 0 &&
+          <Alert
+            alert={alerts[0]}
+            onAlertEnd={onAlertEnd}
+            className={'sdd'}
+          />
+        }
       </div>
 
       <hr/>

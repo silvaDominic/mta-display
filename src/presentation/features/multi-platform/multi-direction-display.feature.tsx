@@ -37,10 +37,10 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals, aler
     <>
       <div id="stack" className={`${applyAlertClasses()}`}>
         <div id='stack-wrapper'>
-          <div className={`mdd container`}>
+          <div className={`mdd display__container`}>
             {
               sortedLeftSideArrivals.map((arrData: ArrivalInfoModel, index: number) => (
-                <div key={arrData.id} className={`mdd wrapper pos-${index}`}>
+                <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="left-direction direction">
                     <img src="../../public/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
                     <Card
@@ -56,10 +56,10 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals, aler
             }
           </div>
 
-          <div className="mdd container">
+          <div className="mdd display__container">
             {
               sortedRightSideArrivals.map((arrData: ArrivalInfoModel, index: number) => (
-                <div key={arrData.id} className={`mdd wrapper pos-${index}`}>
+                <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="right-direction direction">
                     <img src="../../public/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>
                     <Card
@@ -77,12 +77,14 @@ export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals, aler
         </div>
 
 
-        {alerts.length > 0 &&
+        {
+          alerts.length > 0 &&
           <Alert
             alert={alerts[0]}
             onAlertEnd={onAlertEnd}
             className={'mdd'}
-          />}
+          />
+        }
       </div>
 
       <hr/>

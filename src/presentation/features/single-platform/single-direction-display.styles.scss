@@ -1,27 +1,27 @@
-.sdd.container {
+.sdd.display__container {
   position: relative;
   height: 200px;
   overflow: hidden;
 
-  .card-content {
+  .card__content {
     flex-direction: column;
     border-radius: 1rem;
 
-    .minute {
+    .card__minute {
       flex-direction: row;
       align-items: baseline;
       margin-bottom: 1rem;
     }
   }
 
-  .train-line {
+  .card__train-line {
     font-size: 2.75rem;
     width: 66px;
     height: 66px;
     margin: 0 1.75rem;
   }
 
-  .title {
+  .card__train-name {
     white-space: nowrap;
     font-size: 2.47rem;
   }
@@ -38,11 +38,11 @@
   .pos-0, .pos-1 {
     transition: transform 0s linear, opacity 0.5s ease 0.25s;
 
-    .card-content {
+    .card__content {
       opacity: 0.75;
       padding-left: calc(100% - 200px);
 
-      .train-line {
+      .card__train-line {
         margin-top: 1rem;
         margin-bottom: 1rem;
         margin-left: 0;
@@ -51,14 +51,14 @@
   }
 
   .pos-2 {
-    .card-content {
+    .card__content {
       align-items: flex-start;
 
-      .train-info {
+      .card__wrapper {
         margin: 0.5rem 0 1rem 0;
       }
 
-      .minute {
+      .card__minute {
         transition: margin-left 0.5s;
         margin-left: 8rem;
 
@@ -71,7 +71,7 @@
         }
       }
 
-      .title {
+      .card__train-name {
         transition: opacity 0.5s ease 0.25s;
       }
     }
@@ -87,20 +87,20 @@
     .pos-2 {
       width: 200px !important;
 
-      .title {
+      .card__train-name {
         transition: opacity 0.5s ease, transform 0.25s linear 0.5s;
         opacity: 0;
         transform: translateX(-100%);
         width: 0;
       }
 
-      .minute {
+      .card__minute {
         margin-left: 2rem;
       }
     }
   }
 
-  .sdd.wrapper {
+  .display__wrapper {
     height: 100%;
 
     &.deleting {

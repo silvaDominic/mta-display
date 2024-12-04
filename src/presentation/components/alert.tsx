@@ -47,9 +47,9 @@ export function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactEle
   }, [alert, onAlertEnd]);
 
   return (
-    <div ref={alertContainerRef} className={`alert-container ${className}`}>
-      <div className='alert-description'>{alert.description}</div>
-      <div ref={alertResolutionRef} className='alert-resolution'>{alert.resolution}</div>
+    <div ref={alertContainerRef} className={`alert__container ${className}`}>
+      <div className='alert__description'>{alert.description}</div>
+      <div ref={alertResolutionRef} className='alert__resolution'>{alert.resolution}</div>
     </div>
   );
 }
