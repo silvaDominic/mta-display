@@ -5,6 +5,7 @@ import { StationSelectionPage } from "./pages/station-selection.page";
 import { DisplaysDemoPage } from "./pages/displays-demo.page";
 
 import './index.css';
+import { PlatformSelectionPage } from "./pages/platform-selection.page";
 
 const container = document.getElementById('root');
 
@@ -16,6 +17,7 @@ if (container) {
         <Route path='/' element={<DisplaysDemoPage />}/>
         <Route path='/train_lines' element={<TrainLineSelectionPage />} />
         <Route path='/train_lines/:line' element={<StationSelectionPage />} />
+        <Route path='/train_lines/:line/stations/:station' element={<PlatformSelectionPage />} />
       </Routes>
     </BrowserRouter>
   );
