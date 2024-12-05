@@ -73,19 +73,17 @@ export function DisplaysDemoPage() {
   }
 
   return (
-    <>
-      <div>
-        <select id="display-select" onChange={(e) => setDisplayType(Number(e.target.value))}>
-          <option value={DisplayType.Single}>Single-platform</option>
-          <option value={DisplayType.Multi}>Multi-platform</option>
-        </select>
+    <div id="displays-demo-page__container">
+      <select id="display-select" onChange={(e) => setDisplayType(Number(e.target.value))}>
+        <option value={DisplayType.Single}>Single-platform</option>
+        <option value={DisplayType.Multi}>Multi-platform</option>
+      </select>
 
-        <button type='button' onClick={onForceNextTrain}>Force next train</button>
-        <button type='button' onClick={forceUpdate}>Force update</button>
-        <button type='button' onClick={toggleAlerts}>Toggle Alerts</button>
-      </div>
+      <button type='button' onClick={onForceNextTrain}>Force next train</button>
+      <button type='button' onClick={forceUpdate}>Force update</button>
+      <button type='button' onClick={toggleAlerts}>Toggle Alerts</button>
 
       {renderDisplay()}
-    </>
+    </div>
   );
 }

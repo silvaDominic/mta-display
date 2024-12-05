@@ -19,3 +19,8 @@
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
+
+#displays-demo-page__container {
+    background-color: #000000;
+    padding: 1rem;
+}
