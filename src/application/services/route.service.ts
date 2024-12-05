@@ -4,6 +4,8 @@ import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 import { fakeId, getRandomFutureTime } from "../../shared/helpers";
 import { AlertModel } from "../models/alert.model";
 import { RouteModel } from "../models/route.model";
+import { StationModel } from "../models/station.model";
+import { PlatformModel } from "../models/platform.model";
 
 const STUB_TIME_DATA = [
   new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
@@ -29,6 +31,17 @@ const STUB_ROUTE_DATA = [
   new RouteModel('3', '3'),
 ];
 
+const STUB_STATIONS_DATA = [
+  new StationModel('F21', 'Carrol St'),
+  new StationModel('F20', 'Bergen St'),
+  new StationModel('A24', 'Hoyt-Schermerhorn St'),
+];
+
+const STUB_PLATFORM_DATA = [
+  new PlatformModel('unknown', 'Carrol St', 'Court St', DIRECTION.N),
+  new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
+]
+
 export const RouteService = {
   getArrivalTimes(platformId: string, direction: DIRECTION): Promise<ArrivalInfoModel[]> {
     console.log(`Times for ${platformId}`);
@@ -47,5 +60,13 @@ export const RouteService = {
   },
   getRoutes(): Promise<RouteModel[]> {
     return Promise.resolve(STUB_ROUTE_DATA);
+  },
+  getStations(routeId: string): Promise<StationModel[]> {
+    console.log(`GET STATIONS FOR ROUTE: ${routeId}`);
+    return Promise.resolve(STUB_STATIONS_DATA);
+  },
+  getPlatform(stationId: string): Promise<PlatformModel[]> {
+    console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
+    return Promise.resolve(STUB_PLATFORM_DATA);
   }
 }
