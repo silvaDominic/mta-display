@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { TrainLineSelectionPage } from "./pages/train-line-selection.page";
 import { StationSelectionPage } from "./pages/station-selection.page";
 import { DisplaysDemoPage } from "./pages/displays-demo.page";
+import { PlatformSelectionPage } from "./pages/platform-selection.page";
+import { DisplayPage } from "./pages/display.page";
 
 import './index.css';
-import { PlatformSelectionPage } from "./pages/platform-selection.page";
 
 const container = document.getElementById('root');
 
@@ -18,6 +19,7 @@ if (container) {
         <Route path='/train_lines' element={<TrainLineSelectionPage />} />
         <Route path='/train_lines/:line' element={<StationSelectionPage />} />
         <Route path='/train_lines/:line/stations/:station' element={<PlatformSelectionPage />} />
+        <Route path='/train_lines/:line/stations/:station/platforms/:direction' element={<DisplayPage />} />
       </Routes>
     </BrowserRouter>
   );
