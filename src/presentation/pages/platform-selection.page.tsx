@@ -17,9 +17,9 @@ export function PlatformSelectionPage() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const destination = formData.get('destination');
+    const direction = formData.get('direction');
 
-    navigate(`./platforms/${destination}`);
+    navigate(`./platforms/${direction}`);
   }
 
   return (
@@ -27,11 +27,11 @@ export function PlatformSelectionPage() {
       <h1>Select Platform</h1>
 
       <form onSubmit={onSubmit}>
-        <select name="destination" id="platform-select">
+        <select name="direction" id="platform-select">
           {
             platforms.map(option =>
-              <option key={option.id} value={option.id}>
-                {option.destination} ({option.direction})
+              <option key={option.id} value={option.direction}>
+                {option.direction} ({option.destination})
               </option>)
           }
         </select>
