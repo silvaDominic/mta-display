@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrivalInfoModel } from "../../application/models/arrival-info.model";
 import { AlertModel } from "../../application/models/alert.model";
 import { findNextTrainToLeave, getNewTime } from "../../shared/helpers";
-import { RouteService } from "../../application/services/route.service";
+import { TrainService } from "../../application/services/train.service";
 import { DIRECTION } from "../../shared/constants/direction.enum";
 import { SingleDirectionDisplay } from "../features/single-platform/single-direction-display.feature";
 import { MultiDirectionDisplay } from "../features/multi-platform/multi-direction-display.feature";
@@ -34,7 +34,7 @@ export function DisplaysDemoPage() {
     if (alerts.length > 0) {
       setAlerts([]);
     } else {
-      RouteService.getAlerts("[platformId]")
+      TrainService.getAlerts("[platformId]")
         .then(res => setAlerts(res));
     }
   }
@@ -42,13 +42,13 @@ export function DisplaysDemoPage() {
   useEffect(() => {
     switch(displayType) {
       case DisplayType.Single:
-        RouteService.getArrivalTimes("[platformId]", DIRECTION.N)
+        TrainService.getArrivalTimes("[platformId]", DIRECTION.N)
           .then(res => {
             setArrivalTimes(res);
           });
         break;
       case DisplayType.Multi:
-        RouteService.getArrivalTimes("[platformId]", DIRECTION.BOTH)
+        TrainService.getArrivalTimes("[platformId]", DIRECTION.BOTH)
           .then(res => {
             setArrivalTimes(res);
           });

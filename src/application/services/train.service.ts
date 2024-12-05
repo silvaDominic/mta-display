@@ -42,7 +42,7 @@ const STUB_PLATFORM_DATA = [
   new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
 ]
 
-export const RouteService = {
+export const TrainService = {
   getArrivalTimes(platformId: string, direction: DIRECTION): Promise<ArrivalInfoModel[]> {
     console.log(`Times for ${platformId}`);
     switch (direction) {

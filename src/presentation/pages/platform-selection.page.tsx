@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { RouteService } from "../../application/services/route.service";
+import { TrainService } from "../../application/services/train.service";
 import { PlatformModel } from "../../application/models/platform.model";
 
 export function PlatformSelectionPage() {
@@ -9,7 +9,7 @@ export function PlatformSelectionPage() {
   const {station} = useParams();
 
   useEffect(() => {
-    RouteService.getPlatform(station)
+    TrainService.getPlatform(station)
       .then(res => setPlatform(res));
   }, []);
 

@@ -1,5 +1,5 @@
 import { FormEvent, ReactElement, useEffect, useState } from "react";
-import { RouteService } from "../../application/services/route.service";
+import { TrainService } from "../../application/services/train.service";
 import { StationModel } from "../../application/models/station.model";
 import { useNavigate, useParams } from "react-router";
 
@@ -9,7 +9,7 @@ export function StationSelectionPage(): ReactElement {
   const {line} = useParams()
 
   useEffect(() => {
-    RouteService.getStations(line)
+    TrainService.getStations(line)
       .then(res => setStations(res));
   }, []);
 
