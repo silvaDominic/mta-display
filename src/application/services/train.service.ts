@@ -16,6 +16,9 @@ const STUB_TIME_DATA = [
   new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
 ];
 
+const STUB_TIME_DATA_NORTH = STUB_TIME_DATA.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.N);
+const STUB_TIME_DATA_SOUTH = STUB_TIME_DATA.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.S);
+
 const STUB_ALERT_DATA = [
   new AlertModel(
     "In Manhattan, uptown [6] skips 51 St, 68 St, 77 St, 96 St, 103 St, 110 St and 116 St",
@@ -40,16 +43,16 @@ const STUB_STATIONS_DATA = [
 const STUB_PLATFORM_DATA = [
   new PlatformModel('unknown', 'Carrol St', 'Court St', DIRECTION.N),
   new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
-]
+];
 
 export const TrainService = {
   getArrivalTimes(platformId: string, direction: DIRECTION): Promise<ArrivalInfoModel[]> {
     console.log(`Times for ${platformId}`);
     switch (direction) {
       case DIRECTION.N:
-        return Promise.resolve(STUB_TIME_DATA).then(res => res.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.N));
+        return Promise.resolve(STUB_TIME_DATA_NORTH).then(res => res);
       case DIRECTION.S:
-        return Promise.resolve(STUB_TIME_DATA).then(res => res.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.S));
+        return Promise.resolve(STUB_TIME_DATA_SOUTH).then(res => res);
       case DIRECTION.BOTH:
         return Promise.resolve(STUB_TIME_DATA);
     }
