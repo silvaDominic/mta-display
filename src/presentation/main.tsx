@@ -1,5 +1,7 @@
 import { createRoot } from 'react-dom/client'
-import App from './app.tsx'
+import { BrowserRouter, Route, Routes } from "react-router";
+import { DisplaysDemoPage } from "./pages/displays-demo.page";
+
 import './index.css'
 
 const container = document.getElementById('root');
@@ -7,7 +9,11 @@ const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
   root.render(
-      <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<DisplaysDemoPage />}/>
+      </Routes>
+    </BrowserRouter>
   );
 } else {
   console.error('Root element not found');
