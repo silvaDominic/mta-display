@@ -46,8 +46,19 @@ const STUB_PLATFORM_DATA = [
 ];
 
 export const TrainService = {
+  getRoutes(): Promise<RouteModel[]> {
+    return Promise.resolve(STUB_ROUTE_DATA);
+  },
+  getStations(routeId: string): Promise<StationModel[]> {
+    console.log(`GET STATIONS FOR ROUTE: ${routeId}`);
+    return Promise.resolve(STUB_STATIONS_DATA);
+  },
+  getPlatform(stationId: string): Promise<PlatformModel[]> {
+    console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
+    return Promise.resolve(STUB_PLATFORM_DATA);
+  },
   getArrivalTimes(platformId: string, direction: DIRECTION): Promise<ArrivalInfoModel[]> {
-    console.log(`Times for ${platformId}`);
+    console.log(`GET ARRIVAL TIMES FOR ${platformId} HEADING ${direction}`);
     switch (direction) {
       case DIRECTION.N:
         return Promise.resolve(STUB_TIME_DATA_NORTH).then(res => res);
@@ -61,15 +72,4 @@ export const TrainService = {
     console.log(`Times for ${platformId}`);
     return Promise.resolve(STUB_ALERT_DATA);
   },
-  getRoutes(): Promise<RouteModel[]> {
-    return Promise.resolve(STUB_ROUTE_DATA);
-  },
-  getStations(routeId: string): Promise<StationModel[]> {
-    console.log(`GET STATIONS FOR ROUTE: ${routeId}`);
-    return Promise.resolve(STUB_STATIONS_DATA);
-  },
-  getPlatform(stationId: string): Promise<PlatformModel[]> {
-    console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
-    return Promise.resolve(STUB_PLATFORM_DATA);
-  }
 }
