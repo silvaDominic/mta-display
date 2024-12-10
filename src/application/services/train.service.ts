@@ -1,4 +1,4 @@
-import { ArrivalInfoModel } from "../models/arrival-info.model.ts";
+import { StopInfoModel } from "../models/stop-info.model.ts";
 import { TRAIN_LINE } from "../../shared/constants/train-line.enum.ts";
 import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 import { fakeId, getRandomFutureTime } from "../../shared/helpers";
@@ -8,16 +8,16 @@ import { StationModel } from "../models/station.model";
 import { PlatformModel } from "../models/platform.model";
 
 const STUB_TIME_DATA = [
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new ArrivalInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
+  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
 ];
 
-const STUB_TIME_DATA_NORTH = STUB_TIME_DATA.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.N);
-const STUB_TIME_DATA_SOUTH = STUB_TIME_DATA.filter((data: ArrivalInfoModel)=> data.direction === DIRECTION.S);
+const STUB_TIME_DATA_NORTH = STUB_TIME_DATA.filter((data: StopInfoModel)=> data.direction === DIRECTION.N);
+const STUB_TIME_DATA_SOUTH = STUB_TIME_DATA.filter((data: StopInfoModel)=> data.direction === DIRECTION.S);
 
 const STUB_ALERT_DATA = [
   new AlertModel(
@@ -57,7 +57,7 @@ export const TrainService = {
     console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
     return Promise.resolve(STUB_PLATFORM_DATA);
   },
-  getArrivalTimes(platformId: string, direction: DIRECTION): Promise<ArrivalInfoModel[]> {
+  getArrivalTimes(platformId: string, direction: DIRECTION): Promise<StopInfoModel[]> {
     console.log(`GET ARRIVAL TIMES FOR ${platformId} HEADING ${direction}`);
     switch (direction) {
       case DIRECTION.N:

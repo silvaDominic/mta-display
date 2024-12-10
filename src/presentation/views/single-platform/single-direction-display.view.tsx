@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
+import { StopInfoModel } from "../../../application/models/stop-info.model";
 import { Card } from "../../components/card";
 import { Debug } from "../../components/debug";
 import { AlertModel } from "../../../application/models/alert.model";
@@ -9,19 +9,19 @@ import '../display.scss';
 import './single-direction-display.styles.scss';
 
 type SingleDirectionDisplayViewProps = {
-  arrivalTimes: ArrivalInfoModel[],
+  arrivalTimes: StopInfoModel[],
   alerts: AlertModel[],
   onAlertEnd: () => void;
 }
 
 export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: SingleDirectionDisplayViewProps): ReactElement {
-  const sortedTimes: ArrivalInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes());
-  const [displayedTimes, setDisplayedTimes] = useState<ArrivalInfoModel[]>(sortedTimes);
+  const sortedTimes: StopInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes());
+  const [displayedTimes, setDisplayedTimes] = useState<StopInfoModel[]>(sortedTimes);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isShowingAlert, setIsShowingAlert] = useState<boolean>(false);
 
   useEffect(() => {
-    setDisplayedTimes((prev: ArrivalInfoModel[]) => {
+    setDisplayedTimes((prev: StopInfoModel[]) => {
       if (prev !== sortedTimes) {
         setIsDeleting(true);
         return prev;
@@ -47,7 +47,7 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
     return isShowingAlert ? 'alerting' : '';
   }
 
-  function applyBoardingClass(arrivalInfo: ArrivalInfoModel): string {
+  function applyBoardingClass(arrivalInfo: StopInfoModel): string {
     return '';
     return `${arrivalInfo.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
   }
@@ -56,7 +56,7 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
     <>
       <div className={`sdd display__container ${applyAlertClasses()}`}>
         {
-          displayedTimes?.map((arrData: ArrivalInfoModel, index: number) => (
+          displayedTimes?.map((arrData: StopInfoModel, index: number) => (
             <div
               key={arrData.id}
               className={

@@ -1,7 +1,7 @@
 import { TRAIN_LINE } from "../../shared/constants/train-line.enum.ts";
 import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 
-export class ArrivalInfoModel {
+export class StopInfoModel {
   constructor(
     public readonly id: string,
     public readonly line: TRAIN_LINE,

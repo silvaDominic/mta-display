@@ -1,4 +1,4 @@
-import { ArrivalInfoModel } from "../../../application/models/arrival-info.model";
+import { StopInfoModel } from "../../../application/models/stop-info.model";
 import { Card } from "../../components/card";
 import { Debug } from "../../components/debug";
 import { Alert } from "../../components/alert";
@@ -9,8 +9,8 @@ import '../display.scss';
 import './multi-direction-display.styles.scss';
 
 type MultiDirectionDisplayViewProps = {
-  leftSideArrivals: ArrivalInfoModel[];
-  rightSideArrivals: ArrivalInfoModel[];
+  leftSideArrivals: StopInfoModel[];
+  rightSideArrivals: StopInfoModel[];
   alerts: AlertModel[];
   onAlertEnd: () => void;
 }
@@ -30,7 +30,7 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
     return isShowingAlert ? 'alerting' : '';
   }
 
-  function applyBoardingClass(arrivalInfo: ArrivalInfoModel): string {
+  function applyBoardingClass(arrivalInfo: StopInfoModel): string {
     return '';
     return `${arrivalInfo.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
   }
@@ -41,7 +41,7 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
         <div id='stack-wrapper'>
           <div className={`mdd display__container`}>
             {
-              sortedLeftSideArrivals.map((arrData: ArrivalInfoModel, index: number) => (
+              sortedLeftSideArrivals.map((arrData: StopInfoModel, index: number) => (
                 <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="left-direction direction">
                     <img src="../../public/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
@@ -60,7 +60,7 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
 
           <div className="mdd display__container">
             {
-              sortedRightSideArrivals.map((arrData: ArrivalInfoModel, index: number) => (
+              sortedRightSideArrivals.map((arrData: StopInfoModel, index: number) => (
                 <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="right-direction direction">
                     <img src="../../public/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>

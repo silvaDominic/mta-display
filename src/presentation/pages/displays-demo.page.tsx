@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrivalInfoModel } from "../../application/models/arrival-info.model";
+import { StopInfoModel } from "../../application/models/stop-info.model";
 import { AlertModel } from "../../application/models/alert.model";
 import { findNextTrainToLeave, getNewTime } from "../../shared/helpers";
 import { TrainService } from "../../application/services/train.service";
@@ -13,13 +13,13 @@ enum DisplayType {
 }
 
 export function DisplaysDemoPage() {
-  const [arrivalTimes, setArrivalTimes] = useState<ArrivalInfoModel[]>([]);
+  const [arrivalTimes, setArrivalTimes] = useState<StopInfoModel[]>([]);
   const [displayType, setDisplayType] = useState<DisplayType>(DisplayType.Single);
   const [alerts, setAlerts] = useState<AlertModel[]>([]);
 
   function onForceNextTrain() {
     const nextToLeave = findNextTrainToLeave(arrivalTimes);
-    setArrivalTimes((prev: ArrivalInfoModel[]) => {
+    setArrivalTimes((prev: StopInfoModel[]) => {
       const temp = [...prev];
       temp.splice(nextToLeave, 1);
       return [...temp, getNewTime()];
@@ -63,8 +63,8 @@ export function DisplaysDemoPage() {
           return <SingleDirectionDisplayView arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
         case DisplayType.Multi:
           return <MultiDirectionDisplayView
-            leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
-            rightSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.S)}
+            leftSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
+            rightSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.S)}
             alerts={alerts}
             onAlertEnd={toggleAlerts}
           />;

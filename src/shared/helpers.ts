@@ -1,4 +1,4 @@
-import { ArrivalInfoModel } from "../application/models/arrival-info.model";
+import { StopInfoModel } from "../application/models/stop-info.model";
 import { TRAIN_LINE } from "./constants/train-line.enum";
 import { DIRECTION } from "./constants/direction.enum";
 
@@ -11,17 +11,17 @@ export function getRandomFutureTime(minTime = 2, maxTime = 20): number {
   return Date.now() + (minutesRemaining * 60 * 1000);
 }
 
-export function findNextTrainToLeave(arrivalTimes: ArrivalInfoModel[]): number {
+export function findNextTrainToLeave(arrivalTimes: StopInfoModel[]): number {
   const timeToLeaveValues = arrivalTimes.map(time => time.arrivalTime);
   const lowestTimeToLeave = Math.min(...timeToLeaveValues);
 
   return timeToLeaveValues.indexOf(lowestTimeToLeave);
 }
 
-export function getNewTime(): ArrivalInfoModel {
+export function getNewTime(): StopInfoModel {
   const destination = Math.round(Math.random()) > 0 ? 'Court St' : 'Church Ave';
 
-  return new ArrivalInfoModel(
+  return new StopInfoModel(
     fakeId(),
     TRAIN_LINE.G,
     getRandomFutureTime(),
