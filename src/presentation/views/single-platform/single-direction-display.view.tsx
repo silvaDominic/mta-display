@@ -8,13 +8,13 @@ import { Alert } from "../../components/alert";
 import '../display.scss';
 import './single-direction-display.styles.scss';
 
-type SingleDirectionDisplayProps = {
+type SingleDirectionDisplayViewProps = {
   arrivalTimes: ArrivalInfoModel[],
   alerts: AlertModel[],
   onAlertEnd: () => void;
 }
 
-export function SingleDirectionDisplay({arrivalTimes, alerts, onAlertEnd}: SingleDirectionDisplayProps): ReactElement {
+export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: SingleDirectionDisplayViewProps): ReactElement {
   const sortedTimes: ArrivalInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes());
   const [displayedTimes, setDisplayedTimes] = useState<ArrivalInfoModel[]>(sortedTimes);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);

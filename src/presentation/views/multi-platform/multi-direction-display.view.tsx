@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 import '../display.scss';
 import './multi-direction-display.styles.scss';
 
-type MultiDirectionDisplayProps = {
+type MultiDirectionDisplayViewProps = {
   leftSideArrivals: ArrivalInfoModel[];
   rightSideArrivals: ArrivalInfoModel[];
   alerts: AlertModel[];
   onAlertEnd: () => void;
 }
 
-export function MultiDirectionDisplay({leftSideArrivals, rightSideArrivals, alerts, onAlertEnd}: MultiDirectionDisplayProps) {
+export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, alerts, onAlertEnd}: MultiDirectionDisplayViewProps) {
   const [isShowingAlert, setIsShowingAlert] = useState<boolean>(false);
   const sortedLeftSideArrivals = leftSideArrivals
     .sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes()).slice(0, 3);

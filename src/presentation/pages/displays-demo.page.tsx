@@ -4,8 +4,8 @@ import { AlertModel } from "../../application/models/alert.model";
 import { findNextTrainToLeave, getNewTime } from "../../shared/helpers";
 import { TrainService } from "../../application/services/train.service";
 import { DIRECTION } from "../../shared/constants/direction.enum";
-import { SingleDirectionDisplay } from "../features/single-platform/single-direction-display.feature";
-import { MultiDirectionDisplay } from "../features/multi-platform/multi-direction-display.feature";
+import { SingleDirectionDisplayView } from "../views/single-platform/single-direction-display.view";
+import { MultiDirectionDisplayView } from "../views/multi-platform/multi-direction-display.view";
 
 enum DisplayType {
   Single,
@@ -60,9 +60,9 @@ export function DisplaysDemoPage() {
     if (arrivalTimes.length > 0) {
       switch (displayType) {
         case DisplayType.Single:
-          return <SingleDirectionDisplay arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
+          return <SingleDirectionDisplayView arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
         case DisplayType.Multi:
-          return <MultiDirectionDisplay
+          return <MultiDirectionDisplayView
             leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
             rightSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.S)}
             alerts={alerts}

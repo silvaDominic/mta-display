@@ -2,8 +2,8 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { TrainService } from "../../application/services/train.service";
 import { ArrivalInfoModel } from "../../application/models/arrival-info.model";
-import { SingleDirectionDisplay } from "../features/single-platform/single-direction-display.feature";
-import { MultiDirectionDisplay } from "../features/multi-platform/multi-direction-display.feature";
+import { SingleDirectionDisplayView } from "../views/single-platform/single-direction-display.view";
+import { MultiDirectionDisplayView } from "../views/multi-platform/multi-direction-display.view";
 import { DIRECTION } from "../../shared/constants/direction.enum";
 import { AlertModel } from "../../application/models/alert.model";
 
@@ -22,9 +22,9 @@ export function DisplayPage() {
       switch (direction) {
         case DIRECTION.N:
         case DIRECTION.S:
-          return <SingleDirectionDisplay arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={() => {}}/>;
+          return <SingleDirectionDisplayView arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={() => {}}/>;
         case DIRECTION.BOTH:
-          return <MultiDirectionDisplay
+          return <MultiDirectionDisplayView
             leftSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.N)}
             rightSideArrivals={arrivalTimes.filter((time: ArrivalInfoModel) => time.direction === DIRECTION.S)}
             alerts={alerts}
