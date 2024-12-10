@@ -16,7 +16,7 @@ export function Card({title, trainLine, minute, isFront, className = '', style}:
     <div style={style} className={`card card__container ${className}`}>
       <div className='card__content'>
         <div className='card__wrapper'>
-          <h2 className="card__train-line"><span>{trainLine}</span></h2>
+          <img className='card__train-line' src={`/train-line-icons/${trainLine.toLowerCase()}.svg`} alt=""/>
           {isFront && <h1 className="card__train-name">{title}</h1>}
         </div>
         <div className="card__minute">

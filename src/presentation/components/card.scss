@@ -36,11 +36,7 @@ h1, h2 {
   }
 
   .card__train-line {
-    font-size: 2.5rem;
     margin: 0 1rem;
-    border-radius: 50%;
-    background-color: #6dbe45;
-    color: white;
     width: 60px;
     height: 60px;
     @include flex-center;
