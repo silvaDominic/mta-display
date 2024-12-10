@@ -44,7 +44,7 @@ export function MultiDirectionDisplayView({leftSideStops, rightSideStops, alerts
               sortedLeftSideStops.map((stop: StopInfoModel, index: number) => (
                 <div key={stop.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="left-direction direction">
-                    <img src="../../public/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
+                    <img src="/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
                     <Card
                       title={stop.destination}
                       trainLine={stop.line.toString()}
@@ -63,7 +63,7 @@ export function MultiDirectionDisplayView({leftSideStops, rightSideStops, alerts
               sortedRightSideStops.map((stop: StopInfoModel, index: number) => (
                 <div key={stop.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="right-direction direction">
-                    <img src="../../public/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>
+                    <img src="/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>
                     <Card
                       title={stop.destination}
                       trainLine={stop.line.toString()}
@@ -77,7 +77,6 @@ export function MultiDirectionDisplayView({leftSideStops, rightSideStops, alerts
             }
           </div>
         </div>
-
 
         {
           alerts.length > 0 &&
