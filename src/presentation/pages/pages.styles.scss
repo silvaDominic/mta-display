@@ -1,0 +1,36 @@
+.selection__container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	h1 {
+		margin-bottom: 1rem;
+	}
+}
+
+.train-line-grid__container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+}
+
+.train-line__button {
+	background: none; /* Remove any background */
+	border: none; /* Remove border */
+	padding: 0; /* Remove padding */
+	margin: 0; /* Remove margin */
+	cursor: pointer;
+
+	img	{
+		transition: opacity 0.25s; /* Smooth transition for border and opacity */
+		border-radius: 50%;
+		opacity: 0.7; /* Initial opacity */
+	}
+
+	img:hover {
+		opacity: 1; /* Decrease opacity on hover */
+	}
+}

@@ -1,42 +1,33 @@
-import { FormEvent, ReactElement, useEffect, useState } from "react";
-import { TrainService } from "../../application/services/train.service";
-import { RouteModel } from "../../application/models/route.model";
+import { ReactElement } from "react";
 import { useNavigate } from "react-router";
+import { TRAIN_LINES } from "../constants";
 
+import './pages.styles.scss';
 
 export function TrainLineSelectionPage(): ReactElement {
-  const [trainLines, setTrainLines] = useState<RouteModel[]>([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    TrainService.getRoutes()
-      .then(res => setTrainLines(res));
-  }, []);
-
-  function onSubmit(event: FormEvent<HTMLFormElement>): void  {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const trainLine = formData.get('train-line');
-
-    navigate(`./${trainLine}`);
+  function onConfirm(lineId: string): void {
+    navigate(`./${lineId}`);
   }
 
   return (
-    <div>
+    <div className='selection__container'>
       <h1>Select Train Line</h1>
 
-      <form onSubmit={onSubmit}>
-        <select id='train-line-select' name="train-line">
-          {
-            trainLines.map(route =>
-              <option key={route.id} value={route.id}>
-                {route.name}
-              </option>)
-          }
-        </select>
-        <button>Confirm</button>
-      </form>
+      <div className='train-line-grid__container'>
+        {
+          TRAIN_LINES.map(line => (
+            <button
+              key={line.id}
+              onClick={() => onConfirm(line.id)}
+              className='train-line__button'
+            >
+              <img src={line.src} alt={line.alt}/>
+            </button>
+          ))
+        }
+      </div>
     </div>
   );
 }
