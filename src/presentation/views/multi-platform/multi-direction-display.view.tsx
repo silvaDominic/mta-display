@@ -9,18 +9,18 @@ import '../display.scss';
 import './multi-direction-display.styles.scss';
 
 type MultiDirectionDisplayViewProps = {
-  leftSideArrivals: StopInfoModel[];
-  rightSideArrivals: StopInfoModel[];
+  leftSideStops: StopInfoModel[];
+  rightSideStops: StopInfoModel[];
   alerts: AlertModel[];
   onAlertEnd: () => void;
 }
 
-export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, alerts, onAlertEnd}: MultiDirectionDisplayViewProps) {
+export function MultiDirectionDisplayView({leftSideStops, rightSideStops, alerts, onAlertEnd}: MultiDirectionDisplayViewProps) {
   const [isShowingAlert, setIsShowingAlert] = useState<boolean>(false);
-  const sortedLeftSideArrivals = leftSideArrivals
-    .sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes()).slice(0, 3);
-  const sortedRightSideArrivals = rightSideArrivals
-    .sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes()).slice(0, 3);
+  const sortedLeftSideStops = leftSideStops
+    .sort((stopA, stopB) => stopB.getTimeUntilArrivalInMinutes() - stopA.getTimeUntilArrivalInMinutes()).slice(0, 3);
+  const sortedRightSideStops = rightSideStops
+    .sort((stopA, stopB) => stopB.getTimeUntilArrivalInMinutes() - stopA.getTimeUntilArrivalInMinutes()).slice(0, 3);
 
   useEffect(() => {
     setIsShowingAlert(alerts.length > 0);
@@ -30,9 +30,9 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
     return isShowingAlert ? 'alerting' : '';
   }
 
-  function applyBoardingClass(arrivalInfo: StopInfoModel): string {
+  function applyBoardingClass(stop: StopInfoModel): string {
     return '';
-    return `${arrivalInfo.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
+    return `${stop.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
   }
 
   return (
@@ -41,16 +41,16 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
         <div id='stack-wrapper'>
           <div className={`mdd display__container`}>
             {
-              sortedLeftSideArrivals.map((arrData: StopInfoModel, index: number) => (
-                <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
+              sortedLeftSideStops.map((stop: StopInfoModel, index: number) => (
+                <div key={stop.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="left-direction direction">
                     <img src="../../public/icons/arrow-left-circle-outlined.svg" alt="Left arrow"/>
                     <Card
-                      title={arrData.destination}
-                      trainLine={arrData.line.toString()}
-                      minute={arrData.getTimeUntilArrivalInMinutes()}
+                      title={stop.destination}
+                      trainLine={stop.line.toString()}
+                      minute={stop.getTimeUntilArrivalInMinutes()}
                       isFront={index > 1}
-                      className={`${applyBoardingClass(arrData)}`}
+                      className={`${applyBoardingClass(stop)}`}
                     />
                   </div>
                 </div>
@@ -60,16 +60,16 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
 
           <div className="mdd display__container">
             {
-              sortedRightSideArrivals.map((arrData: StopInfoModel, index: number) => (
-                <div key={arrData.id} className={`mdd display__wrapper pos-${index}`}>
+              sortedRightSideStops.map((stop: StopInfoModel, index: number) => (
+                <div key={stop.id} className={`mdd display__wrapper pos-${index}`}>
                   <div className="right-direction direction">
                     <img src="../../public/icons/arrow-right-circle-outlined.svg" alt="Right arrow"/>
                     <Card
-                      title={arrData.destination}
-                      trainLine={arrData.line.toString()}
-                      minute={arrData.getTimeUntilArrivalInMinutes()}
+                      title={stop.destination}
+                      trainLine={stop.line.toString()}
+                      minute={stop.getTimeUntilArrivalInMinutes()}
                       isFront={index > 1}
-                      className={`${applyBoardingClass(arrData)}`}
+                      className={`${applyBoardingClass(stop)}`}
                     />
                   </div>
                 </div>
@@ -93,12 +93,12 @@ export function MultiDirectionDisplayView({leftSideArrivals, rightSideArrivals, 
 
       <div style={{color: 'white'}}>
         <h3>Left</h3>
-        <Debug arrivalTimes={sortedLeftSideArrivals}/>
+        <Debug stops={sortedLeftSideStops}/>
       </div>
 
       <div style={{color: 'white'}}>
         <h3>Right</h3>
-        <Debug arrivalTimes={sortedRightSideArrivals}/>
+        <Debug stops={sortedRightSideStops}/>
       </div>
     </>
   );

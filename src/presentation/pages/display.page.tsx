@@ -22,11 +22,11 @@ export function DisplayPage() {
       switch (direction) {
         case DIRECTION.N:
         case DIRECTION.S:
-          return <SingleDirectionDisplayView arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={() => {}}/>;
+          return <SingleDirectionDisplayView stop={arrivalTimes} alerts={alerts} onAlertEnd={() => {}}/>;
         case DIRECTION.BOTH:
           return <MultiDirectionDisplayView
-            leftSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
-            rightSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.S)}
+            leftSideStops={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
+            rightSideStops={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.S)}
             alerts={alerts}
             onAlertEnd={() => {}}
           />;

@@ -11,8 +11,8 @@ export function getRandomFutureTime(minTime = 2, maxTime = 20): number {
   return Date.now() + (minutesRemaining * 60 * 1000);
 }
 
-export function findNextTrainToLeave(arrivalTimes: StopInfoModel[]): number {
-  const timeToLeaveValues = arrivalTimes.map(time => time.arrivalTime);
+export function findNextTrainToLeave(stops: StopInfoModel[]): number {
+  const timeToLeaveValues = stops.map(stop => stop.arrivalTime);
   const lowestTimeToLeave = Math.min(...timeToLeaveValues);
 
   return timeToLeaveValues.indexOf(lowestTimeToLeave);

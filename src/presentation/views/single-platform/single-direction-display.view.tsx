@@ -9,26 +9,26 @@ import '../display.scss';
 import './single-direction-display.styles.scss';
 
 type SingleDirectionDisplayViewProps = {
-  arrivalTimes: StopInfoModel[],
+  stop: StopInfoModel[],
   alerts: AlertModel[],
   onAlertEnd: () => void;
 }
 
-export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: SingleDirectionDisplayViewProps): ReactElement {
-  const sortedTimes: StopInfoModel[] = arrivalTimes.sort((timeA, timeB) => timeB.getTimeUntilArrivalInMinutes() - timeA.getTimeUntilArrivalInMinutes());
-  const [displayedTimes, setDisplayedTimes] = useState<StopInfoModel[]>(sortedTimes);
+export function SingleDirectionDisplayView({stop, alerts, onAlertEnd}: SingleDirectionDisplayViewProps): ReactElement {
+  const sortedStopData: StopInfoModel[] = stop.sort((stopA, stopB) => stopB.getTimeUntilArrivalInMinutes() - stopA.getTimeUntilArrivalInMinutes());
+  const [displayedTimes, setDisplayedTimes] = useState<StopInfoModel[]>(sortedStopData);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isShowingAlert, setIsShowingAlert] = useState<boolean>(false);
 
   useEffect(() => {
     setDisplayedTimes((prev: StopInfoModel[]) => {
-      if (prev !== sortedTimes) {
+      if (prev !== sortedStopData) {
         setIsDeleting(true);
         return prev;
       }
-      return sortedTimes;
+      return sortedStopData;
     });
-  }, [sortedTimes]);
+  }, [sortedStopData]);
 
   useEffect(() => {
     setIsShowingAlert(alerts.length > 0);
@@ -36,7 +36,7 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
 
   function onTransitionEnd() {
     setIsDeleting(false);
-    setDisplayedTimes(sortedTimes);
+    setDisplayedTimes(sortedStopData);
   }
 
   function applyDeleteClasses(index: number): string {
@@ -47,18 +47,18 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
     return isShowingAlert ? 'alerting' : '';
   }
 
-  function applyBoardingClass(arrivalInfo: StopInfoModel): string {
+  function applyBoardingClass(stop: StopInfoModel): string {
     return '';
-    return `${arrivalInfo.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
+    return `${stop.getTimeUntilDepartureInMinutes() === 0 ? 'boarding' : ''}`;
   }
 
   return (
     <>
       <div className={`sdd display__container ${applyAlertClasses()}`}>
         {
-          displayedTimes?.map((arrData: StopInfoModel, index: number) => (
+          displayedTimes?.map((stop: StopInfoModel, index: number) => (
             <div
-              key={arrData.id}
+              key={stop.id}
               className={
                 `display__wrapper pos-${index}
               ${applyDeleteClasses(index)}`
@@ -66,11 +66,11 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
               onTransitionEnd={onTransitionEnd}
             >
               <Card
-                title={arrData.destination}
-                trainLine={arrData.line.toString()}
-                minute={arrData.getTimeUntilArrivalInMinutes()}
+                title={stop.destination}
+                trainLine={stop.line.toString()}
+                minute={stop.getTimeUntilArrivalInMinutes()}
                 isFront={index > 1}
-                className={applyBoardingClass(arrData)}
+                className={applyBoardingClass(stop)}
               />
             </div>
           ))
@@ -87,7 +87,7 @@ export function SingleDirectionDisplayView({arrivalTimes, alerts, onAlertEnd}: S
 
       <hr/>
 
-      <Debug arrivalTimes={arrivalTimes}/>
+      <Debug stops={stop}/>
     </>
   );
 }

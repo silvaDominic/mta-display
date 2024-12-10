@@ -60,11 +60,11 @@ export function DisplaysDemoPage() {
     if (arrivalTimes.length > 0) {
       switch (displayType) {
         case DisplayType.Single:
-          return <SingleDirectionDisplayView arrivalTimes={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
+          return <SingleDirectionDisplayView stop={arrivalTimes} alerts={alerts} onAlertEnd={toggleAlerts}/>;
         case DisplayType.Multi:
           return <MultiDirectionDisplayView
-            leftSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
-            rightSideArrivals={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.S)}
+            leftSideStops={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
+            rightSideStops={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.S)}
             alerts={alerts}
             onAlertEnd={toggleAlerts}
           />;

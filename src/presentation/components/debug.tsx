@@ -2,19 +2,19 @@ import { Fragment, ReactElement } from "react";
 import { StopInfoModel } from "../../application/models/stop-info.model";
 
 type DebugProps = {
-  arrivalTimes: StopInfoModel[],
+  stops: StopInfoModel[],
 }
 
-export function Debug({arrivalTimes}: DebugProps): ReactElement {
+export function Debug({stops}: DebugProps): ReactElement {
   return (
     <ol>
       {
-        arrivalTimes.map((time: StopInfoModel) => {
+        stops.map((stop: StopInfoModel) => {
           return(
-            <Fragment key={time.id}>
+            <Fragment key={stop.id}>
               <li style={{color: 'white'}}>
-                <span><span>{time.destination}</span> {time.getTimeUntilArrivalInMinutes()} mins</span>
-                <div>{time.getTimeUntilDepartureInMinutes()} </div>
+                <span><span>{stop.destination}</span> {stop.getTimeUntilArrivalInMinutes()} mins</span>
+                <div>{stop.getTimeUntilDepartureInMinutes()} </div>
               </li>
             </Fragment>
           )
