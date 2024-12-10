@@ -3,6 +3,8 @@ import { TrainService } from "../../application/services/train.service";
 import { StationModel } from "../../application/models/station.model";
 import { useNavigate, useParams } from "react-router";
 
+import './pages.styles.scss';
+
 export function StationSelectionPage(): ReactElement {
   const [stations, setStations] = useState<StationModel[]>([]);
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export function StationSelectionPage(): ReactElement {
   }
 
   return (
-    <div>
+    <div className='selection__container'>
       <h1>Select Station</h1>
 
       <form onSubmit={onSubmit}>

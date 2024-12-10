@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router";
 import { TrainService } from "../../application/services/train.service";
 import { PlatformModel } from "../../application/models/platform.model";
 
+import './pages.styles.scss';
+
 export function PlatformSelectionPage() {
   const [platforms, setPlatform] = useState<PlatformModel[]>([]);
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export function PlatformSelectionPage() {
   }
 
   return (
-    <div>
+    <div className='selection__container'>
       <h1>Select Platform</h1>
 
       <form onSubmit={onSubmit}>
