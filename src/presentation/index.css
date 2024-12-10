@@ -16,6 +16,14 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100vh;
+}
+
+body, #root {
+    height: 100%;
+}
+
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }

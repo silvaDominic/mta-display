@@ -6,6 +6,7 @@ import { DisplaysDemoPage } from "./pages/displays-demo.page";
 import { PlatformSelectionPage } from "./pages/platform-selection.page";
 import { DisplayPage } from "./pages/display.page";
 
+import './normalize.css';
 import './index.css';
 
 const container = document.getElementById('root');
