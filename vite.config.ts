@@ -4,6 +4,9 @@ import path from 'path';
 import { loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
+
+  const env = loadEnv(mode, process.cwd());
+
   return {
     plugins: [react()],
     root: path.resolve(__dirname, 'src/presentation'), // Set root to presentation
@@ -16,7 +19,17 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
-      'process.env': loadEnv(mode, process.cwd()), // Load environment variables from the root .env file
+      'process.env': env, // Load environment variables from the root .env file
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: env.VITE_API_URL,
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
     },
   };
 });
