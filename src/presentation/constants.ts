@@ -140,3 +140,5 @@ export const TRAIN_LINES = [
     alt: 'S,R'
   },
 ];
+
+export const BASE_URL = process.env.VITE_BASE_URL;
