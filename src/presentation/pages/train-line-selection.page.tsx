@@ -17,13 +17,13 @@ export function TrainLineSelectionPage(): ReactElement {
 
       <div className='train-line-grid__container'>
         {
-          TRAIN_LINES.map(line => (
+          Object.values(TRAIN_LINES).map(line => (
             <button
               key={line.id}
               onClick={() => onConfirm(line.id)}
               className='train-line__button'
             >
-              <img src={line.src} alt={line.alt}/>
+              <img src={line.imgRef} alt={line.longName}/>
             </button>
           ))
         }
