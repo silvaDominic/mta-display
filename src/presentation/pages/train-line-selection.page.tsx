@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router";
-import { TRAIN_LINES } from "../constants";
 
 import './pages.styles.scss';
+import { TrainService } from "../../application/services/train.service";
 
 export function TrainLineSelectionPage(): ReactElement {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export function TrainLineSelectionPage(): ReactElement {
 
       <div className='train-line-grid__container'>
         {
-          Object.values(TRAIN_LINES).map(line => (
+          TrainService.getTrainLines().map(line => (
             <button
               key={line.id}
               onClick={() => onConfirm(line.id)}
