@@ -13,10 +13,10 @@ export class StopInfoModel {
   ) {}
 
   getTimeUntilArrivalInMinutes(): number {
-    return Math.round((this.arrivalTime - Date.now()) / (60 * 1000));
+    return Math.round(((this.arrivalTime * 1000) - Date.now()) / (60 * 1000));
   }
 
   getTimeUntilDepartureInMinutes(): number {
-    return Math.round((this.departureTime - Date.now()) / (60 * 1000));
+    return Math.round(((this.departureTime * 1000) - Date.now()) / (60 * 1000));
   }
 }
