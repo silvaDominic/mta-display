@@ -1,7 +1,5 @@
 import { StopInfoModel } from "../models/stop-info.model.ts";
-import { TRAIN_LINE } from "../../shared/constants/train-line.enum.ts";
 import { DIRECTION } from "../../shared/constants/direction.enum.ts";
-import { fakeId, getRandomFutureTime } from "../../shared/helpers";
 import { AlertModel } from "../models/alert.model";
 import { StationModel } from "../models/station.model";
 import { BASE_URL } from "../../presentation/constants";
@@ -9,18 +7,6 @@ import { TrainMapper } from "../utils/train.mapper";
 import { TRAIN_LINES } from "../constants"
 
 const NYC_SUBWAY_ENDPOINT = `${BASE_URL}/systems/us-ny-subway`;
-
-const STUB_TIME_DATA = [
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
-  new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Court St', DIRECTION.N),
-];
-
-const STUB_TIME_DATA_NORTH = STUB_TIME_DATA.filter((data: StopInfoModel)=> data.direction === DIRECTION.N);
-const STUB_TIME_DATA_SOUTH = STUB_TIME_DATA.filter((data: StopInfoModel)=> data.direction === DIRECTION.S);
 
 const STUB_ALERT_DATA = [
   new AlertModel(
@@ -52,15 +38,15 @@ export const TrainService = {
       throw err;
     }
   },
-  getArrivalTimes(platformId: string, direction: DIRECTION): Promise<StopInfoModel[]> {
-    console.log(`GET ARRIVAL TIMES FOR ${platformId} HEADING ${direction}`);
-    switch (direction) {
-      case DIRECTION.N:
-        return Promise.resolve(STUB_TIME_DATA_NORTH).then(res => res);
-      case DIRECTION.S:
-        return Promise.resolve(STUB_TIME_DATA_SOUTH).then(res => res);
-      case DIRECTION.BOTH:
-        return Promise.resolve(STUB_TIME_DATA);
+  async getArrivalTimes(stationId: string, direction: DIRECTION): Promise<StopInfoModel[]> {
+    const URL = `${NYC_SUBWAY_ENDPOINT}/stops/${stationId}${direction}`;
+    try {
+      const resp = await fetch(URL);
+      const data = await resp.json();
+      return TrainMapper.dtoToStopInfoModel(data, direction).slice(0, 3);
+    } catch (err: any) {
+      console.error(err);
+      throw err;
     }
   },
   getAlerts(platformId: string): Promise<AlertModel[]> {
