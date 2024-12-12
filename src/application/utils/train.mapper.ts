@@ -7,9 +7,9 @@ export const TrainMapper = {
   },
 
   dtoToStopInfoModel(dto: any, direction): StopInfoModel[] {
-    return dto.stopTimes.map((info: any) => (
+    return dto.stopTimes.slice(0, 3).map((info: any) => (
       new StopInfoModel(
-        info.arrival.time,
+        info.trip.id,
         info.trip.route.id,
         info.arrival.time,
         info.departure.time,
