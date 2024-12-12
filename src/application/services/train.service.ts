@@ -6,6 +6,10 @@ import { AlertModel } from "../models/alert.model";
 import { RouteModel } from "../models/route.model";
 import { StationModel } from "../models/station.model";
 import { PlatformModel } from "../models/platform.model";
+import { BASE_URL } from "../../presentation/constants";
+import { TrainMapper } from "@/application/utils/train.mapper";
+
+const NYC_SUBWAY_ENDPOINT = `${BASE_URL}/systems/us-ny-subway`;
 
 const STUB_TIME_DATA = [
   new StopInfoModel(fakeId(), TRAIN_LINE.G, getRandomFutureTime(), Date.now() + 10, 'Church Ave', DIRECTION.S),
@@ -34,12 +38,6 @@ const STUB_ROUTE_DATA = [
   new RouteModel('3', '3'),
 ];
 
-const STUB_STATIONS_DATA = [
-  new StationModel('F21', 'Carrol St'),
-  new StationModel('F20', 'Bergen St'),
-  new StationModel('A24', 'Hoyt-Schermerhorn St'),
-];
-
 const STUB_PLATFORM_DATA = [
   new PlatformModel('unknown', 'Carrol St', 'Court St', DIRECTION.N),
   new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
@@ -49,9 +47,16 @@ export const TrainService = {
   getRoutes(): Promise<RouteModel[]> {
     return Promise.resolve(STUB_ROUTE_DATA);
   },
-  getStations(routeId: string): Promise<StationModel[]> {
-    console.log(`GET STATIONS FOR ROUTE: ${routeId}`);
-    return Promise.resolve(STUB_STATIONS_DATA);
+  async getStations(routeId: string): Promise<StationModel[]> {
+    const URL = `${NYC_SUBWAY_ENDPOINT}/routes/${routeId}`;
+    try {
+      const resp = await fetch(`${URL}`);
+      const data = await resp.json();
+      return TrainMapper.dtoToStationModel(data);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   },
   getPlatform(stationId: string): Promise<PlatformModel[]> {
     console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
