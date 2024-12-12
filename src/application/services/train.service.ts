@@ -4,7 +4,6 @@ import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 import { fakeId, getRandomFutureTime } from "../../shared/helpers";
 import { AlertModel } from "../models/alert.model";
 import { StationModel } from "../models/station.model";
-import { PlatformModel } from "../models/platform.model";
 import { BASE_URL } from "../../presentation/constants";
 import { TrainMapper } from "../utils/train.mapper";
 import { TRAIN_LINES } from "../constants"
@@ -30,11 +29,6 @@ const STUB_ALERT_DATA = [
   )
 ];
 
-const STUB_PLATFORM_DATA = [
-  new PlatformModel('unknown', 'Carrol St', 'Court St', DIRECTION.N),
-  new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
-];
-
 type TrainLine = {
   id: string,
   shortName: string,
@@ -57,10 +51,6 @@ export const TrainService = {
       console.error(err);
       throw err;
     }
-  },
-  getPlatform(stationId: string): Promise<PlatformModel[]> {
-    console.log(`GET PLATFORMS FOR STATION: ${stationId}`);
-    return Promise.resolve(STUB_PLATFORM_DATA);
   },
   getArrivalTimes(platformId: string, direction: DIRECTION): Promise<StopInfoModel[]> {
     console.log(`GET ARRIVAL TIMES FOR ${platformId} HEADING ${direction}`);
