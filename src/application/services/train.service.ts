@@ -3,11 +3,11 @@ import { TRAIN_LINE } from "../../shared/constants/train-line.enum.ts";
 import { DIRECTION } from "../../shared/constants/direction.enum.ts";
 import { fakeId, getRandomFutureTime } from "../../shared/helpers";
 import { AlertModel } from "../models/alert.model";
-import { RouteModel } from "../models/route.model";
 import { StationModel } from "../models/station.model";
 import { PlatformModel } from "../models/platform.model";
 import { BASE_URL } from "../../presentation/constants";
-import { TrainMapper } from "@/application/utils/train.mapper";
+import { TrainMapper } from "../utils/train.mapper";
+import { TRAIN_LINES } from "../constants"
 
 const NYC_SUBWAY_ENDPOINT = `${BASE_URL}/systems/us-ny-subway`;
 
@@ -30,22 +30,22 @@ const STUB_ALERT_DATA = [
   )
 ];
 
-const STUB_ROUTE_DATA = [
-  new RouteModel('G', 'G'),
-  new RouteModel('D', 'D'),
-  new RouteModel('1', '1'),
-  new RouteModel('2', '2'),
-  new RouteModel('3', '3'),
-];
-
 const STUB_PLATFORM_DATA = [
   new PlatformModel('unknown', 'Carrol St', 'Court St', DIRECTION.N),
   new PlatformModel('unknown', 'Carrol St', 'Church St', DIRECTION.S),
 ];
 
+type TrainLine = {
+  id: string,
+  shortName: string,
+  longName: string,
+  description: string,
+  imgRef: string,
+}
+
 export const TrainService = {
-  getRoutes(): Promise<RouteModel[]> {
-    return Promise.resolve(STUB_ROUTE_DATA);
+  getTrainLines(): TrainLine[] {
+    return Object.values(TRAIN_LINES as Record<string, TrainLine>);
   },
   async getStations(routeId: string): Promise<StationModel[]> {
     const URL = `${NYC_SUBWAY_ENDPOINT}/routes/${routeId}`;
