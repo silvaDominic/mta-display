@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from "react";
+import { memo, ReactElement, useEffect, useRef } from "react";
 import { AlertModel } from "../../application/models/alert.model";
 
 import './alert.scss';
@@ -11,7 +11,7 @@ type AlertProps = {
   className?: string;
 }
 
-export function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactElement {
+export const Alert = memo(function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactElement {
   const alertContainerRef = useRef<HTMLDivElement>(null);
   const alertResolutionRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +37,6 @@ export function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactEle
       if (alertContainer.scrollTop < alertContainer.scrollHeight - offset) {
         alertContainer.scrollTop += scrollIncrement;
       } else {
-        // TODO: Consider how this will be handled with real time data
         onAlertEnd();
         clearInterval(intervalId);
       }
@@ -52,4 +51,6 @@ export function Alert({alert, onAlertEnd, className = ''}: AlertProps): ReactEle
       <div ref={alertResolutionRef} className='alert__resolution'>{alert.resolution}</div>
     </div>
   );
-}
+}, (prev, next) => {
+  return JSON.stringify(prev.alert) === JSON.stringify(next.alert);
+});
