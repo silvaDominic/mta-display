@@ -1,6 +1,6 @@
-# mta-widget
+# MTA Display
 
-A widget for displaying NYC subway train times for various lines.
+An implementation of an alternative design to the MTA Arrival Time Displays.
 
 ## Purpose
 
