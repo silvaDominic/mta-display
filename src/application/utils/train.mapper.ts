@@ -1,5 +1,6 @@
 import { StationModel } from "../models/station.model";
 import { StopInfoModel } from "../models/stop-info.model";
+import { AlertModel } from "../models/alert.model";
 
 export const TrainMapper = {
   dtoToStationModel(dto: any): StationModel[] {
@@ -17,5 +18,15 @@ export const TrainMapper = {
         direction
       )
     ));
+  },
+  dtoToAlertsModel(alerts: any[]): AlertModel[] {
+    console.log(alerts)
+    const alertModels: AlertModel[] = [];
+    alerts.forEach(alert => {
+      const header = alert.header.find((header: any) => header.language === 'en');
+      const description = alert.description.find((desc: any) => desc.language === 'en');
+      alertModels.push(new AlertModel(header.text, description.text || ''));
+    });
+    return alertModels;
   }
 }
