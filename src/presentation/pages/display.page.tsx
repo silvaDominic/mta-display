@@ -6,6 +6,7 @@ import { SingleDirectionDisplayView } from "../views/single-platform/single-dire
 import { MultiDirectionDisplayView } from "../views/multi-platform/multi-direction-display.view";
 import { DIRECTION } from "../../shared/constants/direction.enum";
 import { AlertModel } from "../../application/models/alert.model";
+import { FETCH_ALERT_INTERVAL, FETCH_ARRIVAL_TIMES_INTERVAL } from "../constants";
 
 export function DisplayPage() {
   const [arrivalTimes, setArrivalTimes] = useState<StopInfoModel[]>([]);
@@ -16,15 +17,24 @@ export function DisplayPage() {
   useEffect(() => {
     const id = setInterval(() => {
       TrainService.getArrivalTimes(station, direction)
-        .then(resp => setArrivalTimes(resp))
-    }, 5000);
+        .then((arrivalTimes: StopInfoModel[]) => setArrivalTimes(arrivalTimes))
+    }, FETCH_ARRIVAL_TIMES_INTERVAL);
 
     return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
-    TrainService.getAlerts(line)
-      .then(resp => setAlerts(resp));
+    const id = setInterval(() => {
+      TrainService.getAlerts(line)
+        .then((alerts: AlertModel[]) => {
+          setAlerts(alerts);
+          if (alerts.length > 0) {
+            setIsShowingAlerts(true);
+          }
+        });
+    }, FETCH_ALERT_INTERVAL);
+
+    return () => clearInterval(id);
   }, []);
 
   function renderDisplay() {
