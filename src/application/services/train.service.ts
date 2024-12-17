@@ -8,13 +8,6 @@ import { TRAIN_LINES } from "../constants"
 
 const NYC_SUBWAY_ENDPOINT = `${BASE_URL}/systems/us-ny-subway`;
 
-const STUB_ALERT_DATA = [
-  new AlertModel(
-    "In Manhattan, uptown [6] skips 51 St, 68 St, 77 St, 96 St, 103 St, 110 St and 116 St",
-    "For service to these stations, take the [6] to 59 St or 125 St accessibility icon and transfer to a downtown [4] local or [6].\n\nFor service from these stations, take the [4] or [6] to 59 St or Grand Central-42 St accessibility icon and transfer to an uptown [6].\n\nTravel tip:\nTransfer between uptown and downtown trains with Unlimited Ride MetroCard or fare-capped OMNY at 86 St.\n\nWhat's happening?\nEscalator replacement\n\naccessibility icon This service change affects one or more ADA accessible stations and these travel alternatives may not be fully accessible. Please contact 511 to plan your trip."
-  )
-];
-
 type TrainLine = {
   id: string,
   shortName: string,
@@ -49,8 +42,34 @@ export const TrainService = {
       throw err;
     }
   },
-  getAlerts(platformId: string): Promise<AlertModel[]> {
-    console.log(`Times for ${platformId}`);
-    return Promise.resolve(STUB_ALERT_DATA);
+  /**
+   * Gets alert ids for a particular train line and then gets all alerts of those ids.
+   * @param routeId
+   */
+  async getAlerts(routeId: string): Promise<AlertModel[]> {
+    console.log(`Times for ${routeId}`);
+    const ROUTES_URL = `${NYC_SUBWAY_ENDPOINT}/routes/${routeId}`;
+    const ALERTS_URL = `${NYC_SUBWAY_ENDPOINT}/alerts`;
+    try {
+      // Get routes
+      const routesResp = await fetch(`${ROUTES_URL}`);
+      const routeData = await routesResp.json();
+
+      // Extract Ids
+      const alertIds: string[] = routeData.alerts.map((alert: any) => alert.id);
+      // Build query params for alert ids
+      const queryParams = [];
+      for (const id of alertIds) {
+        queryParams.push(`alert_id=${id}`);
+      }
+      // Fetch all alerts
+      const alertResp = await fetch(`${ALERTS_URL}?${queryParams.join('&')}`);
+      const alertData = await alertResp.json();
+
+      return TrainMapper.dtoToAlertsModel(alertData.alerts);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   },
 }
