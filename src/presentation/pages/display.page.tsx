@@ -10,7 +10,7 @@ import { AlertModel } from "../../application/models/alert.model";
 export function DisplayPage() {
   const [arrivalTimes, setArrivalTimes] = useState<StopInfoModel[]>([]);
   const [alerts, setAlerts] = useState<AlertModel[]>([]);
-  const {station, direction} = useParams();
+  const {line, station, direction} = useParams();
   const [isShowingAlerts, setIsShowingAlerts] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,6 +20,11 @@ export function DisplayPage() {
     }, 5000);
 
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    TrainService.getAlerts(line)
+      .then(resp => setAlerts(resp));
   }, []);
 
   function renderDisplay() {
