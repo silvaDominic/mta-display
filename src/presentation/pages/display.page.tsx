@@ -11,10 +11,15 @@ export function DisplayPage() {
   const [arrivalTimes, setArrivalTimes] = useState<StopInfoModel[]>([]);
   const [alerts, setAlerts] = useState<AlertModel[]>([]);
   const {station, direction} = useParams();
+  const [isShowingAlerts, setIsShowingAlerts] = useState<boolean>(false);
 
   useEffect(() => {
-    TrainService.getArrivalTimes(station, direction)
-      .then(res => setArrivalTimes(res));
+    const id = setInterval(() => {
+      TrainService.getArrivalTimes(station, direction)
+        .then(resp => setArrivalTimes(resp))
+    }, 5000);
+
+    return () => clearInterval(id);
   }, []);
 
   function renderDisplay() {
@@ -22,7 +27,12 @@ export function DisplayPage() {
       switch (direction) {
         case DIRECTION.N:
         case DIRECTION.S:
-          return <SingleDirectionDisplayView stop={arrivalTimes} alerts={alerts} onAlertEnd={() => {}}/>;
+          return <SingleDirectionDisplayView
+            stop={arrivalTimes}
+            alerts={alerts}
+            isShowingAlerts={isShowingAlerts}
+            onAlertEnd={() => setIsShowingAlerts(false)}
+          />;
         case DIRECTION.BOTH:
           return <MultiDirectionDisplayView
             leftSideStops={arrivalTimes.filter((time: StopInfoModel) => time.direction === DIRECTION.N)}
