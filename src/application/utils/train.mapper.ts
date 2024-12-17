@@ -20,12 +20,11 @@ export const TrainMapper = {
     ));
   },
   dtoToAlertsModel(alerts: any[]): AlertModel[] {
-    console.log(alerts)
     const alertModels: AlertModel[] = [];
     alerts.forEach(alert => {
       const header = alert.header.find((header: any) => header.language === 'en');
-      const description = alert.description.find((desc: any) => desc.language === 'en');
-      alertModels.push(new AlertModel(header.text, description.text || ''));
+      const description = alert.description.find((desc: any) => desc.language === 'en') || "";
+      alertModels.push(new AlertModel(header.text, description.text));
     });
     return alertModels;
   }
