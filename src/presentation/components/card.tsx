@@ -20,8 +20,14 @@ export function Card({title, trainLine, minute, isFront, className = '', style}:
           {isFront && <h1 className="card__train-name">{title}</h1>}
         </div>
         <div className="card__minute">
-          <h1>{minute}</h1>
-          <span>min</span>
+          {
+            minute <= 0
+            ? <h1>Now</h1>
+            : <>
+                <h1>{minute}</h1>
+                <span>min</span>
+              </>
+          }
         </div>
       </div>
       <div className='card-spacer'></div>
